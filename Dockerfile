@@ -11,9 +11,10 @@ RUN apt install -y texlive-latex-recommended && \
     apt install -y latexmk && \
     apt install -y tex-gyre
 
-RUN pip3 install sphinx && \
-    pip3 install myst-parser && \  
-    pip3 install sphinx-book-theme
+RUN pip3 install sphinx
+
+COPY docs/requirements.txt /requirements.txt
+RUN pip3 install -r /requirements.txt
 
 WORKDIR /root/ros2_ws/src
 
