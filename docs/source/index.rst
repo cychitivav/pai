@@ -18,3 +18,12 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+
+This documentation is build with
+
+[](https://github.com/ammaraskar/sphinx-action)
+
+Contributing
+============
+
