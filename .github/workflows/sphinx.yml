@@ -18,10 +18,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.8
-
-      - run: cd docs
+      
+      - name: Change directory
+        run: cd docs
       - name: Install dependencies with pip
-        run: pip install --upgrade -r docs/requirements.txt
+        run: ls && \
+             pip install --upgrade -r docs/requirements.txt
       - name: Build the docs
         run: make html # && make latexpdf
       
