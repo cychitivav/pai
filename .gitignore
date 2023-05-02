@@ -6,3 +6,14 @@
 *.pyc
 *.py[cod]
 *$py.class
+
+# MATLAB temporal files
+*.asv
+*.slxc
+slprj
+
+## temporal office files
+~$* 
+# build artifacts
+build/
+_build/

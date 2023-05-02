@@ -93,7 +93,7 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
 	```sh
-	git clone https://github.com/cychitivav/repo_name.git
+	git clone https://github.com/cychitivav/pai.git
 	```
 2. Next steps
 
