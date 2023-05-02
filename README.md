@@ -18,15 +18,15 @@ Find and replace the following text with the name of the project:
 # README title
 An awesome README description!
 
-[**Explore the docs »**](https://github.com/cychitivav/repo_name/wiki)
+[**Explore the docs »**](https://github.com/cychitivav/pai/wiki)
 
-[View Demo](https://github.com/cychitivav/repo_name) · [Report Bug](https://github.com/cychitivav/repo_name/issues) · [Request Feature](https://github.com/cychitivav/repo_name/issues)
+[View Demo](https://github.com/cychitivav/pai) · [Report Bug](https://github.com/cychitivav/pai/issues) · [Request Feature](https://github.com/cychitivav/pai/issues)
 
-[![Contributors](https://img.shields.io/github/contributors/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/repo_name/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/repo_name/network/members)
-[![Stargazers](https://img.shields.io/github/stars/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/repo_name/stargazers)
-[![Issues](https://img.shields.io/github/issues/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/repo_name/issues)
-[![MIT License](https://img.shields.io/github/license/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/repo_name/blob/main/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/network/members)
+[![Stargazers](https://img.shields.io/github/stars/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/stargazers)
+[![Issues](https://img.shields.io/github/issues/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/issues)
+[![MIT License](https://img.shields.io/github/license/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/blob/main/LICENSE)
 
 
 </div>
@@ -102,7 +102,7 @@ This is an example of how to list things you need to use the software and how to
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-> __Note__: For more examples, please refer to the* [*Documentation*](https://github.com/cychitivav/repo_name/wiki)
+> __Note__: For more examples, please refer to the* [*Documentation*](https://github.com/cychitivav/pai/wiki)
 
 
 
@@ -114,7 +114,7 @@ Use this space to show useful examples of how a project can be used. Additional 
 - [ ] Feature 2
     - [ ] Nested Feature
 
-> __Note__: See the [open issues](https://github.com/cychitivav/repo_name/issues) for a full list of proposed features (and known issues).
+> __Note__: See the [open issues](https://github.com/cychitivav/pai/issues) for a full list of proposed features (and known issues).
 
 <div align="right">
 
