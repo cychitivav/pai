@@ -6,7 +6,8 @@ on:
   workflow_dispatch:
   push:
     branches:
-      - main
+      - main 
+      - dev/gh-actions
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
 
       - run: cd docs
       - name: Install dependencies with pip
-        run: pip install --upgrade -r requirements.txt
+        run: pip install --upgrade -r docs/requirements.txt
       - name: Build the docs
         run: make html # && make latexpdf
       
