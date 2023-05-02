@@ -1,0 +1,19 @@
+# VSCode trash files
+*.vscode
+
+# Python trash files
+*__pycache__*
+*.pyc
+*.py[cod]
+*$py.class
+
+# MATLAB temporal files
+*.asv
+*.slxc
+slprj
+
+## temporal office files
+~$* 
+# build artifacts
+build/
+_build/
