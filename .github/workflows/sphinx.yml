@@ -34,5 +34,5 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3.8.0
         with:
           github_token: ${{ secrets.GHPAGES_TOKEN }}
-          publish_branch: main # if your main branch is `master` use that here.
+          publish_branch: gh-pages
           publish_dir: ./docs/build/html
