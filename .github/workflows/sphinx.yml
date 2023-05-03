@@ -33,13 +33,13 @@ jobs:
           cd docs 
           make test
 
-      - run: mkdir -p /src
+      - run: mkdir -p ${{ github.workspace }}/src
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
           name: webapp-artifact
-          path: /src
+          path: ${{ github.workspace }}/src
 
   upload:
     needs: build
@@ -49,7 +49,7 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: webapp-artifact
-          path: /src
+          path: ${{ github.workspace }}/src
 
       - name: Checkout
         uses: peaceiris/actions-gh-pages@v3
