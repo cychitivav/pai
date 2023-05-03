@@ -7,7 +7,7 @@ EMOJIS
 * https://gist.github.com/rxaviers/7360908
   
 Find and replace the following text with the name of the project:
-	repo_name
+	pai
 -->
 
 <div align="center" id="readme-top">
@@ -18,15 +18,15 @@ Find and replace the following text with the name of the project:
 # README title
 An awesome README description!
 
-[**Explore the docs »**](https://github.com/cychitivav/pai/wiki)
+[**Explore the docs »**](https://cychitivav.github.io/pai)
 
 [View Demo](https://github.com/cychitivav/pai) · [Report Bug](https://github.com/cychitivav/pai/issues) · [Request Feature](https://github.com/cychitivav/pai/issues)
 
-[![Contributors](https://img.shields.io/github/contributors/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/graphs/contributors)
-[![Forks](https://img.shields.io/github/forks/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/network/members)
-[![Stargazers](https://img.shields.io/github/stars/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/stargazers)
-[![Issues](https://img.shields.io/github/issues/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/issues)
-[![MIT License](https://img.shields.io/github/license/cychitivav/repo_name.svg?style=for-the-badge)](https://github.com/cychitivav/pai/blob/main/LICENSE)
+[![Contributors](https://img.shields.io/github/contributors/cychitivav/pai.svg?style=for-the-badge)](https://github.com/cychitivav/pai/graphs/contributors)
+[![Forks](https://img.shields.io/github/forks/cychitivav/pai.svg?style=for-the-badge)](https://github.com/cychitivav/pai/network/members)
+[![Stargazers](https://img.shields.io/github/stars/cychitivav/pai.svg?style=for-the-badge)](https://github.com/cychitivav/pai/stargazers)
+[![Issues](https://img.shields.io/github/issues/cychitivav/pai.svg?style=for-the-badge)](https://github.com/cychitivav/pai/issues)
+[![MIT License](https://img.shields.io/github/license/cychitivav/pai.svg?style=for-the-badge)](https://github.com/cychitivav/pai/blob/main/LICENSE)
 
 
 </div>
@@ -54,7 +54,7 @@ An awesome README description!
 
 [![Product Name Screen Shot](https://user-images.githubusercontent.com/30635659/169600958-763d1628-b7bb-475c-a8bc-56120d1d3ff9.svg)](https://user-images.githubusercontent.com/30635659/169600958-763d1628-b7bb-475c-a8bc-56120d1d3ff9.svg)
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor `repo_name`
+Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor `pai`
 
 <div align="right">
 
