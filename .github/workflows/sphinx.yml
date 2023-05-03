@@ -1,5 +1,5 @@
 #  Simple workflow for deploying from sphinx to GitHub Pages
-name: Sphinx build
+name: Sphinx build and deployment
 
 on: 
   # Allows you to run this workflow manually from the Actions tab
