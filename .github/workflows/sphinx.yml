@@ -33,13 +33,11 @@ jobs:
           cd docs 
           make test
 
-      - run: mkdir -p ~/src
-
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
           name: webapp-artifact
-          path: ~/src
+          path: ./docs/build/html/
 
   upload:
     needs: build
@@ -49,11 +47,10 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: webapp-artifact
-          path: ~/src
 
       - name: Checkout
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GHPAGES_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./src
+          publish_dir: ./docs/build/html
