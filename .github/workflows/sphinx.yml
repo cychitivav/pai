@@ -32,10 +32,25 @@ jobs:
           cd docs 
           make test
 
-      # push the generated content into the `main` (former `master`) branch.
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3.8.0
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: webapp-artifact
+          path: /page
+
+  upload:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: webapp-artifact
+          path: /page
+
+      - name: Checkout
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GHPAGES_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: ./docs/build/html
+          publish_dir: ./page
