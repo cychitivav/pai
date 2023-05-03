@@ -1,7 +1,6 @@
 FROM ros:humble
 
 WORKDIR /root/ros2_ws
-ADD . /root/ros2_ws/src/pai
 
 RUN apt update && apt upgrade -y && \
     apt install python3-pip -y 
@@ -19,6 +18,8 @@ RUN pip3 install sphinx && \
     pip3 install myst-parser && \  
     pip3 install sphinx-book-theme
 
-RUN pip3 install -r docs/requirements.txt
+
+ADD ./docs/requirements.txt /root/ros2_ws/src/pai/docs/requirements.txt
+RUN pip3 install -r src/pai/docs/requirements.txt
 
 CMD ["bash"]
