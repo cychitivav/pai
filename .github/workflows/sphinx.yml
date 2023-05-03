@@ -50,6 +50,9 @@ jobs:
       - name: Install dependencies with pip
         run: pip install --upgrade -r docs/requirements.txt
 
+      - name: Install latex
+        run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk 
+
       - name: Build the docs
         run: |
           cd docs 
