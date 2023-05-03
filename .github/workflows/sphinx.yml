@@ -33,7 +33,7 @@ jobs:
           cd docs 
           make test
 
-      - run: mkdir -p \src
+      - run: mkdir -p /src
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
