@@ -7,13 +7,16 @@
 *.py[cod]
 *$py.class
 
-# MATLAB temporal files
+# MATLAB temporary files
 *.asv
 *.slxc
-slprj
+*slprj
 
-## temporal office files
+# Temporary office files
 ~$* 
+
 # build artifacts
-build/
-_build/
+*build/
+
+# WSL files
+*.Identifier
