@@ -77,7 +77,7 @@ jobs:
       - name: Build the docs
         run: |
           cd docs 
-          make doctest
+          make test
 
   upload:
     needs: test
