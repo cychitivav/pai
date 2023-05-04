@@ -13,15 +13,29 @@ n=10;
 P_damper = [width/2; 10];
 k_damper = 2;  % N/m
 
-
 q1 = -45*pi/180; % angle parameter first articulation 
 q5 = -45*pi/180; % angle parameter last articulation
 
 points = kinematic_chain(q1,q5,width,L1,L2,L3,L4) 
 
-vq1= linspace(-30, -70,n);
+Li= 100;
+Ld = 100;
+alpha_i = pi/2;
 
-vq5= linspace(-30, -70,n);
+alpha_d = pi/2;
+hi = 80;
+hd = 80;
+[q1,q5,points_wheels] = wheel_mechanism(hi,hd,Li,Ld,alpha_i,alpha_d,width);
+
+q1*180/pi
+q5*180/pi
+
+points = kinematic_chain(q1,q5,width,L1,L2,L3,L4) 
+
+%%
+vhi= linspace(40,80 ,n);
+
+vhd= linspace(40, 80,n);
 
 datalog = zeros(n,n);
 
@@ -29,9 +43,11 @@ for i = 1:n
 
     for j = 1:n
      
-        q1 = vq1(i)*pi/180;
-        q5 = vq5(j)*pi/180;
-    
+        hi = vhi(i);
+        hd = vhd(j);
+        
+        [q1,q5,points_wheels] = wheel_mechanism(hi,hd,Li,Ld,alpha_i,alpha_d,width);
+
         [points,P3,P4] = kinematic_chain(q1,q5,width,L1,L2,L3,L4) ;
         
         x = points(1,:);
@@ -49,9 +65,11 @@ for i = 1:n
         plot([P4(1),P3(1)],[P4(2),P3(2)],'o-');
         plot([0,P4(1)],[0,P4(2)],'*')
         plot([P2(1),P_damper(1)],[P2(2),P_damper(2)],'-+')
-         
+        plot(points_wheels(1,:),points_wheels(2,:)) 
         axis equal
         grid on
+        xlim([-100,300])
+        ylim([-150,100])
     
         pause (0.01)
         hold off
@@ -60,13 +78,27 @@ for i = 1:n
 end
 %%
 
-[Q1,Q5] = meshgrid(vq1,vq5);
-
+[Q1,Q5] = meshgrid(vhi,vhd);
+figure()
 surf(Q1,Q5,datalog)
 
-xlabel("Angle Q1 [deg]")
-ylabel("Angle Q5 [deg]")
+xlabel("height left [mm]")
+ylabel("height right [mm]")
 title   ("Force [N]")
+
+function [q1,q5,points_wheels] = wheel_mechanism(hi,hd,Li,Ld,alpha_i,alpha_d,width)
+qin1 = asin(hi/Li);
+qin5 = asin(hd/Ld);
+
+q1 = qin1 + alpha_i -pi
+
+q5 = qin5 + alpha_d -pi
+Pi = Li*[cos(qin1-pi);sin(qin1-pi)];
+Pd = Li*[cos(-qin5);sin(-qin5)];
+P0 = [0;0];
+P4 = [width;0]
+points_wheels = [Pi,P0,P4,P4+Pd];
+end
 
 function [q_a, q_b] =  inverse_kinematics(Lx,Ly,La,Lb)
     L = norm([Lx,Ly]);
