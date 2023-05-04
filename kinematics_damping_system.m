@@ -2,13 +2,12 @@ clear, clc, close 'all'
 
 % parameters
 width = 165;
-
+% parameters damper mechanism
 L1 = 20;          
 L2 = 80;
 L3 = 80;
 L4 = 20;
 
-n=10;
 
 P_damper = [width/2; 10];
 k_damper = 2;  % N/m
@@ -16,16 +15,18 @@ k_damper = 2;  % N/m
 q1 = -45*pi/180; % angle parameter first articulation 
 q5 = -45*pi/180; % angle parameter last articulation
 
-points = kinematic_chain(q1,q5,width,L1,L2,L3,L4) 
+points = kinematic_chain(q1,q5,width,L1,L2,L3,L4) % position damping mechanism
 
-Li= 100;
-Ld = 100;
+% parameters wheel mechanism
+LL= 100;
+LR = 100;
 alpha_i = pi/2;
 
 alpha_d = pi/2;
-hi = 80;
-hd = 80;
-[q1,q5,points_wheels] = wheel_mechanism(hi,hd,Li,Ld,alpha_i,alpha_d,width);
+hL = 80;
+hR = 80;
+% position wheel mechanism
+[q1,q5,points_wheels] = wheel_mechanism(hL,hR,LL,LR,alpha_i,alpha_d,width); 
 
 q1*180/pi
 q5*180/pi
@@ -33,9 +34,11 @@ q5*180/pi
 points = kinematic_chain(q1,q5,width,L1,L2,L3,L4) 
 
 %%
-vhi= linspace(40,80 ,n);
+n=10;       % number of iterations
 
-vhd= linspace(40, 80,n);
+vhL= linspace(40,80 ,n);    % vector height left wheel
+
+vhR= linspace(40, 80,n);    % vector height right wheel
 
 datalog = zeros(n,n);
 
@@ -43,10 +46,10 @@ for i = 1:n
 
     for j = 1:n
      
-        hi = vhi(i);
-        hd = vhd(j);
+        hL = vhL(i);
+        hR = vhR(j);
         
-        [q1,q5,points_wheels] = wheel_mechanism(hi,hd,Li,Ld,alpha_i,alpha_d,width);
+        [q1,q5,points_wheels] = wheel_mechanism(hL,hR,LL,LR,alpha_i,alpha_d,width);
 
         [points,P3,P4] = kinematic_chain(q1,q5,width,L1,L2,L3,L4) ;
         
@@ -78,7 +81,7 @@ for i = 1:n
 end
 %%
 
-[Q1,Q5] = meshgrid(vhi,vhd);
+[Q1,Q5] = meshgrid(vhL,vhR);
 figure()
 surf(Q1,Q5,datalog)
 
@@ -86,15 +89,15 @@ xlabel("height left [mm]")
 ylabel("height right [mm]")
 title   ("Force [N]")
 
-function [q1,q5,points_wheels] = wheel_mechanism(hi,hd,Li,Ld,alpha_i,alpha_d,width)
-qin1 = asin(hi/Li);
-qin5 = asin(hd/Ld);
+function [q1,q5,points_wheels] = wheel_mechanism(hL,hR,LL,LR,alpha_i,alpha_d,width)
+qin1 = asin(hL/LL);
+qin5 = asin(hR/LR);
 
 q1 = qin1 + alpha_i -pi
 
 q5 = qin5 + alpha_d -pi
-Pi = Li*[cos(qin1-pi);sin(qin1-pi)];
-Pd = Li*[cos(-qin5);sin(-qin5)];
+Pi = LL*[cos(qin1-pi);sin(qin1-pi)];
+Pd = LL*[cos(-qin5);sin(-qin5)];
 P0 = [0;0];
 P4 = [width;0]
 points_wheels = [Pi,P0,P4,P4+Pd];
