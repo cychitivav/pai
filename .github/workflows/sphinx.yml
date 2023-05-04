@@ -12,7 +12,21 @@ permissions:
   id-token: write
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies with pip
+        run: pip install --upgrade -r docs/requirements.txt
+
+      - name: Build the docs
+        run: |
+          cd docs 
+          make test
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,23 +46,8 @@ jobs:
           name: webapp
           path: ./docs/build/html/
 
-  test:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install dependencies with pip
-        run: pip install --upgrade -r docs/requirements.txt
-
-      - name: Build the docs
-        run: |
-          cd docs 
-          make test
-
   deploy:
-    needs: test
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
