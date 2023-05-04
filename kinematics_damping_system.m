@@ -40,7 +40,11 @@ vhL= linspace(40,80 ,n);    % vector height left wheel
 
 vhR= linspace(40, 80,n);    % vector height right wheel
 
-datalog = zeros(n,n);
+
+mesh_F_damper  = zeros(n,n);
+mesh_F_L  = zeros(n,n);
+mesh_F_R = zeros(n,n);
+
 
 for i = 1:n
 
@@ -58,10 +62,20 @@ for i = 1:n
         P2 = points(:,3);
     
     
-        L_damper = norm(P2-P_damper);
-        F_damper = k_damper*L_damper;
-    
-        datalog (i,j) = F_damper;
+        [theta_damper,L_damper] = cart2pol(P_damper(1)-P2(1),P_damper(2)-P2(2));
+        F_damper = k_damper*(L_damper-25);
+        
+        % kinetics damper system
+        F_reactions = linsolve([cos(q1),cos(-q5); sin(q1),sin(-q5)],F_damper*[cos(theta_damper); sin(theta_damper)]);
+
+        F_L =F_reactions(1) *[cos(q1);sin(q1)];     % Force direction entering the system
+        F_R =F_reactions(2) *[cos(-q5);sin(-q5)];   % Force direction exiting the system
+        
+        F_L+F_R+F_damper*[cos(theta_damper);sin(theta_damper)];
+
+        mesh_F_damper (i,j) = F_damper;
+        mesh_F_L (i,j) = F_reactions(1);
+        mesh_F_R (i,j) = F_reactions(2);
     
         plot(x,y,'o-');
         hold on
@@ -83,7 +97,10 @@ end
 
 [Q1,Q5] = meshgrid(vhL,vhR);
 figure()
-surf(Q1,Q5,datalog)
+surf(Q1,Q5,mesh_F_damper)
+hold on 
+surf(Q1,Q5,-mesh_F_L,'FaceAlpha',0.8)
+surf(Q1,Q5,mesh_F_R,'FaceAlpha',0.1)
 
 xlabel("height left [mm]")
 ylabel("height right [mm]")
