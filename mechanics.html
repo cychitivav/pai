@@ -31,15 +31,20 @@
 
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
 <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="_static/doctools.js"></script>
     <script src="_static/sphinx_highlight.js"></script>
     <script src="_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'mechanics';</script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -119,7 +124,10 @@
 </a></div>
         <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item navbar-nav active">
-        
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="notebooks/motor.html">Motor selection</a></li>
+</ul>
+
     </div>
 </nav></div>
     </div>
@@ -172,7 +180,7 @@
       
       
       
-      <li><a href="_sources/mechanics.md" target="_blank"
+      <li><a href="_sources/mechanics.rst" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -182,7 +190,7 @@
 <span class="btn__icon-container">
   <i class="fas fa-file"></i>
   </span>
-<span class="btn__text-container">.md</span>
+<span class="btn__text-container">.rst</span>
 </a>
 </li>
       
@@ -264,7 +272,7 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#math">Math</a></li>
 </ul>
             </nav>
         </div>
@@ -278,9 +286,13 @@ document.write(`
                   
   <section id="mechanic-design-process">
 <h1>Mechanic design process<a class="headerlink" href="#mechanic-design-process" title="Permalink to this heading">#</a></h1>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>The process of designing a mechanic is as follows:</p>
+<section id="math">
+<h2>Math<a class="headerlink" href="#math" title="Permalink to this heading">#</a></h2>
+<p>reST also supports LaTeX-style math.</p>
+<p>This is an inline math <span class="math notranslate nohighlight">\(x^2+y^2=z^2\)</span>.</p>
+<p>For long equations, use the <code class="docutils literal notranslate"><span class="pre">math</span></code> directive:</p>
+<div class="math notranslate nohighlight">
+\[\gamma = \sqrt{(\alpha^2 + \beta^2)}\]</div>
 </section>
 </section>
 
@@ -314,7 +326,7 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#math">Math</a></li>
 </ul>
   </nav></div>
 
@@ -329,7 +341,7 @@ document.write(`
   <div class="footer-item">
     
 <p class="component-author">
-By Cristian Chitiva Juan Sebastian Dueñas
+By Cristian Chitiva, Juan Sebastian Dueñas
 </p>
 
   </div>
@@ -338,7 +350,7 @@ By Cristian Chitiva Juan Sebastian Dueñas
     
   <p class="copyright">
     
-      © Copyright 2023, Cristian Chitiva Juan Sebastian Dueñas.
+      © Copyright 2023.
       <br/>
     
   </p>
