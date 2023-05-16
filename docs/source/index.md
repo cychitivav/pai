@@ -4,7 +4,6 @@ This file is a test 2
 ```{toctree}
 ---
 maxdepth: 2
-caption: Contents:
 ---
 notebooks/motor.ipynb
 ```
