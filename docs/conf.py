@@ -7,17 +7,17 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = 'PAI'
-copyright = '2023, Cristian Chitiva Juan Sebastian Dueñas'
-author = 'Cristian Chitiva Juan Sebastian Dueñas'
+copyright = '2023'
+author = 'Cristian Chitiva, Juan Sebastian Dueñas'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['myst_parser']
+extensions = ['myst_parser',
+              "myst_nb"]
 
 templates_path = ['_templates']
 exclude_patterns = []
-
 
 
 # -- Options for HTML output -------------------------------------------------
