@@ -14,3 +14,5 @@ For long equations, use the ``math`` directive:
 .. math::
 
    \gamma = \sqrt{(\alpha^2 + \beta^2)}
+
+
