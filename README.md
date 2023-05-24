@@ -79,30 +79,44 @@ In order to avoid installing ROS on your local machine, we will be using a docke
 ### Installation
 
 1. Clone the repo
-	```sh
+	```bash
 	git clone https://github.com/cychitivav/pai.git
 	```
 2. Build the docker image
-	```sh
+	```bash
 	docker build -t pai:latest .
 	```
 3. Run the docker image
-	```sh
-	docker run -it --rm --name pai -v $PWD:/root/ros2_ws/src/pai pai:latest
+	```bash
+	docker run -it \
+     		   --rm \
+			   -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+               -v $PWD:/root/catkin_ws/src/pai \
+			   --name pai \
+			   pai:latest
 	```
-	1. Steps inside the docker image
-		```sh
-		...
-		```
+	> __Note__: If you have troubles with the display, try to run the following command before running the docker image:
+	> ```bash
+	> xhost +local:root
+	> ```
 
 
 <!-- USAGE EXAMPLES -->
 ## :balloon:Usage
+In order to run the package, you will need to follow the next steps from the workspace directory (`catkin_ws`):
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-> __Note__: For more examples, please refer to the [*Documentation*](https://cychitivav.github.io/pai)
-
+1. Compile packages
+```bash
+catkin build
+```
+1. Source the workspace
+```bash
+source devel/setup.bash
+```
+1. Launch the package
+```bash
+roslaunch pai view_robot.launch
+```
 
 
 
