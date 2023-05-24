@@ -1,0 +1,46 @@
+Traceback (most recent call last):
+  File "/home/runner/.local/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/runner/.local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 166, in wrapped
+    return loop.run_until_complete(inner)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 646, in run_until_complete
+    return future.result()
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/runner/.local/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+L3 = np.linspace(0.03, w/2, 100)
+ΔD = np.zeros(L3.shape)
+
+for i in range(L3.shape[0]):
+    sus = Suspension2DMechanism(0.1, L2, L3[i], 2*L3[i], 2*0.025)
+    D_min = sus.forward_kinematics(q=np.array([-np.pi/2+al, -np.pi/2-al]))
+    D_max = sus.forward_kinematics(q=np.array([-np.pi/4-al, -3*np.pi/4+al]))
+    ΔD[i] = D_max - D_min
+
+plt.figure()
+plt.plot(L3, ΔD)
+plt.xlabel('L3')
+plt.ylabel('ΔD')
+plt.show()
+
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mNameError[0m                                 Traceback (most recent call last)
+Cell [0;32mIn[4], line 5[0m
+[1;32m      2[0m ΔD [38;5;241m=[39m np[38;5;241m.[39mzeros(L3[38;5;241m.[39mshape)
+[1;32m      4[0m [38;5;28;01mfor[39;00m i [38;5;129;01min[39;00m [38;5;28mrange[39m(L3[38;5;241m.[39mshape[[38;5;241m0[39m]):
+[0;32m----> 5[0m     sus [38;5;241m=[39m [43mSuspension2DMechanism[49m([38;5;241m0.1[39m, L2, L3[i], [38;5;241m2[39m[38;5;241m*[39mL3[i], [38;5;241m2[39m[38;5;241m*[39m[38;5;241m0.025[39m)
+[1;32m      6[0m     D_min [38;5;241m=[39m sus[38;5;241m.[39mforward_kinematics(q[38;5;241m=[39mnp[38;5;241m.[39marray([[38;5;241m-[39mnp[38;5;241m.[39mpi[38;5;241m/[39m[38;5;241m2[39m[38;5;241m+[39mal, [38;5;241m-[39mnp[38;5;241m.[39mpi[38;5;241m/[39m[38;5;241m2[39m[38;5;241m-[39mal]))
+[1;32m      7[0m     D_max [38;5;241m=[39m sus[38;5;241m.[39mforward_kinematics(q[38;5;241m=[39mnp[38;5;241m.[39marray([[38;5;241m-[39mnp[38;5;241m.[39mpi[38;5;241m/[39m[38;5;241m4[39m[38;5;241m-[39mal, [38;5;241m-[39m[38;5;241m3[39m[38;5;241m*[39mnp[38;5;241m.[39mpi[38;5;241m/[39m[38;5;241m4[39m[38;5;241m+[39mal]))
+
+[0;31mNameError[0m: name 'Suspension2DMechanism' is not defined
+
