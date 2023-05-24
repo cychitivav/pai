@@ -1,22 +1,21 @@
 FROM ros:noetic
 
-ARG ROS_DISTRO=noetic
 SHELL ["/bin/bash", "-c"]
 
 ENV DISPLAY=:0
 ENV QT_X11_NO_MITSHM=1
 
 # Install catkin tools
-RUN apt update && \
+RUN apt-get update && \
     apt-get install python3-catkin-tools -y
 
 # Install ROS dependencies
-RUN apt install ros-$ROS_DISTRO-rviz -y && \
-    apt install ros-$ROS_DISTRO-xacro -y && \
-    apt install ros-$ROS_DISTRO-robot-state-publisher -y && \
-    apt install ros-$ROS_DISTRO-joint-state-publisher-gui -y
+RUN apt-get install -y ros-noetic-rviz \
+        ros-noetic-xacro \
+        ros-noetic-robot-state-publisher \
+        ros-noetic-joint-state-publisher-gui
 
-RUN source /opt/ros/$ROS_DISTRO/setup.bash
+RUN source /opt/ros/noetic/setup.bash
 
 WORKDIR /root/catkin_ws/
 
