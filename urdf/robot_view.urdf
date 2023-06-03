@@ -1,36 +1,35 @@
 <?xml version="1.0"?>
 
-<robot name="wheels" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="ugv" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
     <!-- Parameters -->
-    <xacro:property name="BH" value="0.224"/>       <!-- Base Height -->
-    <xacro:property name="BW" value="0.592"/>       <!-- Base Width -->
-    <xacro:property name="BL" value="0.824"/>       <!-- Base Long -->
-    <xacro:property name="WR" value="${5*0.0254}"/> <!-- Wheel radius -->
-    <xacro:property name="WW" value="0.084"/>       <!-- Wheel width -->
-    <xacro:property name="F" value="0.097"/>        <!-- Distance from floor -->
-    <xacro:property name="L" value="0.2325"/>       <!-- Distance from center to wheel -->
+    <xacro:property name="BH" value="0.224" />       <!-- Base Height -->
+    <xacro:property name="BW" value="0.592" />       <!-- Base Width -->
+    <xacro:property name="BL" value="0.824" />       <!-- Base Long -->
+    <xacro:property name="WR" value="${5*0.0254}" /> <!-- Wheel radius -->
+    <xacro:property name="WW" value="0.084" />       <!-- Wheel width -->
+    <xacro:property name="F" value="0.097" />        <!-- Distance from floor -->
+    <xacro:property name="L" value="0.2325" />       <!-- Distance from center to wheel -->
 
     <!-- Reference Frame (link 0) -->
-    <link name="world"/>
+    <link name="world" />
 
     <!-- BASE -->
-    
     <joint name="base_joint" type="fixed">
-        <origin xyz="0.0 0.0 0.0"/>
+        <origin xyz="0.0 0.0 0.0" />
         <parent link="world" />
         <child link="base_link" />
     </joint>
 
     <link name="base_link">
-
-        <intertial>
-        </intertial>
-
+        <inertial>
+            <mass value="1.0" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+        </inertial>
         <visual>
             <origin xyz="-0.3 0.0 ${BH/2 + F}" rpy="0.0 0.0 ${-pi/2}" />
             <geometry>
-                <mesh filename="package://pai/meshes/box.dae"/>
+                <mesh filename="package://pai/meshes/box.dae" />
             </geometry>
             <material name="base_material">
                 <color rgba="1.0 0.0 0.0 0.6" />
@@ -40,184 +39,72 @@
         <collision>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="${BL} ${BW} ${BH}"/>
+                <box size="${BL} ${BW} ${BH}" />
             </geometry>
         </collision>
-
     </link>
 
-    <!-- FRONT-RIGHT WHEEL -->
 
-    <joint name="front_right_wheel_joint" type="continuous">
-        <origin xyz="${L} ${-BW/2 - WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0"/>
-        <parent link="base_link"/>
-        <child link="front_right_wheel_link"/>
-        <axis xyz="0 0 1"/>
-    </joint>
+    <xacro:macro name="wheel" params="location base_link:=base_link *origin">
+        <link name="${location}_link">
+            <inertial>
+                <mass value="1.6" />
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            </inertial>
 
-    <transmission name="front_right_wheel_trans">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="front_right_wheel_joint">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0" />
+                <geometry>
+                    <mesh filename="package://pai/meshes/wheel.dae" />
+                </geometry>
+            </visual>
+
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <cylinder radius="${WR}" length="${WW}" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${location}_joint" type="continuous">
+            <xacro:insert_block name="origin" />
+            <parent link="${base_link}" />
+            <child link="${location}_link" />
+            <axis xyz="0 0 1" />
         </joint>
-        <actuator name="front_right_wheel_motor">
-            <hardwareInterface>VelocityJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
 
-    <link name="front_right_wheel_link">
+        <transmission name="${location}_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${location}_joint">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${location}_motor">
+                <hardwareInterface>VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
 
-        <inertial>
-            <mass value="1.6"/>
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-        </inertial>
+    <xacro:wheel location="front_right">
+        <origin xyz="${L} ${-BW/2 - WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+    </xacro:wheel>
 
-        <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0"/>
-            <geometry>
-                <mesh filename="package://pai/meshes/wheel.dae"/>
-            </geometry>
-        </visual>
+    <xacro:wheel location="back_right">
+        <origin xyz="${-L} ${-BW/2 - WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+    </xacro:wheel>
 
-        <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <cylinder radius="${WR}" length="${WW}"/>
-            </geometry>
-        </collision>
+    <xacro:wheel location="front_left">
+        <origin xyz="${L} ${BW/2 + WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+    </xacro:wheel>
 
-    </link>
+    <xacro:wheel location="back_left">
+        <origin xyz="${-L} ${BW/2 + WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+    </xacro:wheel>
 
-    <!-- FRONT-LEFT WHEEL -->
-
-    <joint name="front_left_wheel_joint" type="continuous">
-        <origin xyz="${L} ${BW/2 + WW/2} ${WR}" rpy="${pi/2} 0.0 0.0"/>
-        <parent link="base_link"/>
-        <child link="front_left_wheel_link"/>
-        <axis xyz="0 0 1"/>
-    </joint>
-
-    <transmission name="front_left_wheel_trans">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="front_left_wheel_joint">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="front_left_wheel_motor">
-            <hardwareInterface>VelocityJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
-
-    <link name="front_left_wheel_link">
-
-        <inertial>
-            <mass value="1.6"/>
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-        </inertial>
-
-        <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0"/>
-            <geometry>
-                <mesh filename="package://pai/meshes/wheel.dae"/>
-            </geometry>
-        </visual>
-
-        <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <cylinder radius="${WR}" length="${WW}"/>
-            </geometry>
-        </collision>
-
-    </link>
-
-    <!-- BACK-RIGHT WHEEL -->
-
-    <joint name="back_right_wheel_joint" type="continuous">
-        <origin xyz="${-L} ${-BW/2 - WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0"/>
-        <parent link="base_link"/>
-        <child link="back_right_wheel_link"/>
-        <axis xyz="0 0 1"/>
-    </joint>
-
-    <transmission name="back_right_wheel_trans">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="back_right_wheel_joint">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="back_right_wheel_motor">
-            <hardwareInterface>VelocityJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
-
-    <link name="back_right_wheel_link">
-
-        <inertial>
-            <mass value="1.6"/>
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-        </inertial>
-
-        <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0"/>
-            <geometry>
-                <mesh filename="package://pai/meshes/wheel.dae"/>
-            </geometry>
-        </visual>
-
-        <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <cylinder radius="${WR}" length="${WW}"/>
-            </geometry>
-        </collision>
-
-    </link>
-
-    <!-- BACK-LEFT WHEEL -->
-
-    <joint name="back_left_wheel_joint" type="continuous">
-        <origin xyz="${-L} ${BW/2 + WW/2} ${WR}" rpy="${pi/2} 0.0 0.0"/>
-        <parent link="base_link"/>
-        <child link="back_left_wheel_link"/>
-        <axis xyz="0 0 1"/>
-    </joint>
-
-    <transmission name="back_left_wheel_trans">
-        <type>transmission_interface/SimpleTransmission</type>
-        <joint name="back_left_wheel_joint">
-            <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
-        </joint>
-        <actuator name="back_left_wheel_motor">
-            <hardwareInterface>VelocityJointInterface</hardwareInterface>
-            <mechanicalReduction>1</mechanicalReduction>
-        </actuator>
-    </transmission>
-
-    <link name="back_left_wheel_link">
-
-        <inertial>
-            <mass value="1.6"/>
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/>
-        </inertial>
-
-        <visual>
-            <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0"/>
-            <geometry>
-                <mesh filename="package://pai/meshes/wheel.dae"/>
-            </geometry>
-        </visual>
-
-        <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-            <geometry>
-                <cylinder radius="${WR}" length="${WW}"/>
-            </geometry>
-        </collision>
-
-    </link>
-
-
-
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/ugv</robotNamespace>
+        </plugin>
+    </gazebo>
 </robot>
