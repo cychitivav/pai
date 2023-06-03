@@ -6,6 +6,8 @@
 *.pyc
 *.py[cod]
 *$py.class
+*/build
+*/dist
 
 # MATLAB temporary files
 *.asv

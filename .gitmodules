@@ -1,3 +1,0 @@
-[submodule "lib/max14870-driver-rpi"]
-	path = lib/max14870-driver-rpi
-	url = https://github.com/pololu/dual-max14870-motor-driver-rpi.git
