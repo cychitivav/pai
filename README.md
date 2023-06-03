@@ -56,9 +56,9 @@ Code and documentation for a UGV that can work and be teleoperated in a cultivat
 	<img src="https://user-images.githubusercontent.com/30636259/235977670-f7890966-2141-477a-a577-54380ec47c93.png" alt="Logo" width="80%" style="min-width: 400px;" />
 </div>
 
-Welcome to the <package_name> ROS2 package repository! This package contains source code and documentation for a UGV that can work in a cultivate. This project is part of the *PAI* subject at the Universidad Nacional de Colombia.
+Welcome to the <package_name> ROS 1 package repository! This package contains source code and documentation for a UGV that can work in a field. This project is part of the *PAI* subject at the Universidad Nacional de Colombia.
 
-
+> __Note__: This package is being developed using ROS noetic 
 
 <!-- BADGES
 https://github.com/Ileriayo/markdown-badges -->
