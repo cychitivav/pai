@@ -4,7 +4,7 @@
 
     <!-- Parameters -->
     <xacro:property name="BH" value="0.224" />       <!-- Base Height -->
-    <xacro:property name="BW" value="0.592" />       <!-- Base Width -->
+    <xacro:property name="BW" value="0.5" />       <!-- Base Width -->
     <xacro:property name="BL" value="0.824" />       <!-- Base Long -->
     <xacro:property name="WR" value="${5*0.0254}" /> <!-- Wheel radius -->
     <xacro:property name="WW" value="0.084" />       <!-- Wheel width -->
@@ -37,9 +37,9 @@
         </visual>
 
         <collision>
-            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+            <origin xyz="0.0 0.0 ${BH/2 + F}" rpy="0.0 0.0 0.0" />
             <geometry>
-                <box size="${BL} ${BW} ${BH}" />
+                <box size="${BL} ${BW-0.01} ${BH}" />
             </geometry>
         </collision>
     </link>
@@ -104,7 +104,7 @@
 
     <gazebo>
         <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace>/ugv</robotNamespace>
+            <robotNamespace>/</robotNamespace>
         </plugin>
     </gazebo>
 </robot>

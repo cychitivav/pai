@@ -17,7 +17,8 @@ RUN apt-get install -y --fix-missing \
         ros-noetic-joint-state-publisher-gui \
         ros-noetic-ros-control \
         ros-noetic-ros-controllers \
-        ros-noetic-gazebo-ros-pkgs
+        ros-noetic-gazebo-ros-pkgs \
+        ros-noetic-rqt*
 
 RUN source /opt/ros/noetic/setup.bash
 
