@@ -3,7 +3,7 @@
 <launch>
 
     <!-- Load model -->
-    <arg name="model" default="$(find pai)/urdf/robot_view.urdf"/>
+    <arg name="model" default="$(find pai)/urdf/robot.urdf"/>
 
     <!-- Parse model -->
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>

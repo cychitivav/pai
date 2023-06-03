@@ -9,7 +9,7 @@ import numpy as np
 
 class computer:
     def __init__(self):
-        # Paremeters
+        # Parameters
         r = 0.0352
         # Right wheel
         alpha_right = -np.pi/2
@@ -33,8 +33,10 @@ class computer:
         self.cmd_vel_subscriptor = rospy.Subscriber('/cmd_vel', Twist, self.callback_velocity)
 
         # Publishers
-        self.pub_wheel_right = rospy.Publisher('/right_wheel_ctrl/command', Float64, queue_size=10)
-        self.pub_wheel_left = rospy.Publisher('/left_wheel_ctrl/command', Float64, queue_size=10)
+        self.pub_front_right = rospy.Publisher('/front_right_wheel_ctrl/command', Float64, queue_size=10)
+        self.pub_front_left = rospy.Publisher('/front_left_wheel_ctrl/command', Float64, queue_size=10)
+        self.pub_back_right = rospy.Publisher('/back_right_wheel_ctrl/command', Float64, queue_size=10)
+        self.pub_back_left = rospy.Publisher('/back_left_wheel_ctrl/command', Float64, queue_size=10)
 
     def callback_velocity(self, cmd_vel):
         xiR = np.array([0, 0, 0], dtype=np.float)
@@ -52,10 +54,12 @@ class computer:
 
         msg_Float = Float64()
         msg_Float.data = phi[0]
-        self.pub_wheel_right.publish(msg_Float)
+        self.pub_front_right.publish(msg_Float)
+        self.pub_back_right.publish(msg_Float)
 
         msg_Float.data = phi[1]
-        self.pub_wheel_left.publish(msg_Float)
+        self.pub_front_left.publish(msg_Float)
+        self.pub_back_left.publish(msg_Float)
 
 
 if __name__ == '__main__':

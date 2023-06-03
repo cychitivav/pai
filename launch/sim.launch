@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<launch>
+    <!-- Load model -->
+    <arg name="robot_name" default="ugv" />
+    <arg name="robot_xacro" default="$(find pai)/urdf/robot.urdf" />
+
+    <!-- Parser -->
+    <param name="robot_description" command="$(find xacro)/xacro $(arg robot_xacro)" />
+
+    <!-- Convert joint states to TF transforms for rviz -->
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" />
+
+    <!-- Launch rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find pai)/rviz/rviz_config.rviz" />
+
+    <!-- Launch Gazebo-->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="use_sim_time" value="true" />
+    </include>
+
+    <!-- Spawn model -->
+    <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot" respawn="false"
+        args=" -urdf -param robot_description -model $(arg robot_name)" />
+
+    <!-- Load joint controller configuration -->
+    <rosparam file="$(find pai)/config/controller.yaml" command="load" />
+
+    <!-- Load controller -->
+    <node name="robot_controllers" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen"
+        args="joint_state_controller left_front_ctrl right_front_ctrl left_back_ctrl right_back_ctrl" />
+
+    <!-- Node python scripts -->
+    <node name="kinematic_model" pkg="pai" output="screen" type="kinematic_model.py" />
+</launch>

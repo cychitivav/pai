@@ -10,10 +10,14 @@ RUN apt-get update && \
     apt-get install python3-catkin-tools -y
 
 # Install ROS dependencies
-RUN apt-get install -y ros-noetic-rviz \
+RUN apt-get install -y --fix-missing \
+        ros-noetic-rviz \
         ros-noetic-xacro \
         ros-noetic-robot-state-publisher \
-        ros-noetic-joint-state-publisher-gui
+        ros-noetic-joint-state-publisher-gui \
+        ros-noetic-ros-control \
+        ros-noetic-ros-controllers \
+        ros-noetic-gazebo-ros-pkgs
 
 RUN source /opt/ros/noetic/setup.bash
 
