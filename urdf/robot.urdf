@@ -31,9 +31,6 @@
             <geometry>
                 <mesh filename="package://pai/meshes/box.dae" />
             </geometry>
-            <material name="base_material">
-                <color rgba="1.0 0.0 0.0 0.6" />
-            </material>
         </visual>
 
         <collision>
@@ -95,11 +92,11 @@
     </xacro:wheel>
 
     <xacro:wheel location="front_left">
-        <origin xyz="${L} ${BW/2 + WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+        <origin xyz="${L} ${BW/2 + WW/2} ${WR}" rpy="${pi/2} 0.0 0.0" />
     </xacro:wheel>
 
     <xacro:wheel location="back_left">
-        <origin xyz="${-L} ${BW/2 + WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+        <origin xyz="${-L} ${BW/2 + WW/2} ${WR}" rpy="${pi/2} 0.0 0.0" />
     </xacro:wheel>
 
     <gazebo>
