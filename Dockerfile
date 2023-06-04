@@ -1,4 +1,4 @@
-FROM ros:noetic
+FROM osrf/ros:noetic-desktop-full
 
 SHELL ["/bin/bash", "-c"]
 
@@ -8,17 +8,6 @@ ENV QT_X11_NO_MITSHM=1
 # Install catkin tools
 RUN apt-get update && \
     apt-get install python3-catkin-tools -y
-
-# Install ROS dependencies
-RUN apt-get install -y --fix-missing \
-        ros-noetic-rviz \
-        ros-noetic-xacro \
-        ros-noetic-robot-state-publisher \
-        ros-noetic-joint-state-publisher-gui \
-        ros-noetic-ros-control \
-        ros-noetic-ros-controllers \
-        ros-noetic-gazebo-ros-pkgs \
-        ros-noetic-rqt*
 
 RUN source /opt/ros/noetic/setup.bash
 
