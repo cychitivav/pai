@@ -26,8 +26,8 @@ class computer:
 
         J2 = r*np.identity(2)
 
-        # J2^-1 x J1
-        self.jacobian = np.matmul(np.linalg.pinv(J2), J1)
+        # J^-1 = J2^-1 x J1
+        self.jacobian_inv = np.matmul(np.linalg.pinv(J2), J1)
 
         # Subscriber
         self.cmd_vel_subscriptor = rospy.Subscriber('/cmd_vel', Twist, self.callback_velocity)
@@ -50,7 +50,7 @@ class computer:
         xiR[2] = cmd_vel.angular.z if abs(cmd_vel.angular.z) <= np.pi else sign(cmd_vel.angular.z)*np.pi
 
 
-        phi = np.matmul(self.jacobian, xiR)
+        phi = np.matmul(self.jacobian_inv, xiR)
 
         msg_Float = Float64()
         msg_Float.data = phi[0]
