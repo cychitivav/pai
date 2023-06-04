@@ -5,7 +5,7 @@
     <!-- Parameters -->
     <xacro:property name="BH" value="0.224" />       <!-- Base Height -->
     <xacro:property name="BW" value="0.5" />       <!-- Base Width -->
-    <xacro:property name="BL" value="0.824" />       <!-- Base Long -->
+    <xacro:property name="BL" value="0.824" />       <!-- Base Length -->
     <xacro:property name="WR" value="${5*0.0254}" /> <!-- Wheel radius -->
     <xacro:property name="WW" value="0.084" />       <!-- Wheel width -->
     <xacro:property name="F" value="0.097" />        <!-- Distance from floor -->
