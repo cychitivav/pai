@@ -1,0 +1,21 @@
+# Publish all join states
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 30
+
+# Velocity controllers
+left_back_ctrl:
+  type: velocity_controllers/JointVelocityController
+  joint: left_back_joint
+
+right_back_ctrl:
+  type: velocity_controllers/JointVelocityController
+  joint: right_back_joint
+
+left_front_ctrl:
+  type: velocity_controllers/JointVelocityController
+  joint: left_front_joint
+
+right_front_ctrl:
+  type: velocity_controllers/JointVelocityController
+  joint: right_front_joint
