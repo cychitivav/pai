@@ -3,7 +3,7 @@
 <launch>
 
     <!-- Load model -->
-    <arg name="model" default="$(find pai)/urdf/robot_view.urdf"/>
+    <arg name="model" default="$(find pai)/urdf/robot.urdf"/>
 
     <!-- Parse model -->
     <param name="robot_description" command="$(find xacro)/xacro $(arg model)"/>
@@ -28,7 +28,8 @@
         pkg="rviz"
         type="rviz"
         name="rviz"
-        args="-d $(find pai)/rviz/rviz_config.rviz">
+        args="-d $(find pai)/rviz/rviz_config.rviz"
+        required="true">
     </node>
 
 </launch>
