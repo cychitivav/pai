@@ -17,10 +17,10 @@ class Battery(pigpio.pi):
             rospy.signal_shutdown("Pigpio not connected")
 
         self.ATtiny85 = self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
-        self.factor = 24.6/4350 # Calibration factor
+        self.factor = 24.6/435 # Calibration factor
 
         self.pub = rospy.Publisher('/battery', BatteryState, queue_size=10)
-        self.ser = rospy.Service('calibrate_battery', CalibrateBattery, self.update_calibration)
+        self.ser = rospy.Service('/calibrate_battery', CalibrateBattery, self.update_calibration)
         
         msg = BatteryState()
 
@@ -66,6 +66,9 @@ class Battery(pigpio.pi):
 
         # Update calibration factor
         self.factor = req.voltage / data
+        rospy.loginfo("Calibration factor updated to %f", self.factor)
+        rospy.loginfo("Battery voltage: %f", self.get_voltage())
+        rospy.loginfo("Battery percentage: %f", self.get_voltage()/25.2)
 
 
 if __name__ == '__main__':
