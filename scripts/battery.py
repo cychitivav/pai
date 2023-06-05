@@ -3,7 +3,7 @@ import rospy
 
 from std_msgs.msg import Float64, Float32, String
 from sensor_msgs.msg import BatteryState
-from cob_srvs.srv import SetFloat64, SetFloat64Request  
+from pai.srv import CalibrateBattery
 
 import pigpio
 
@@ -20,7 +20,7 @@ class Battery(pigpio.pi):
         self.factor = 24.6/4350 # Calibration factor
 
         self.pub = rospy.Publisher('/battery', Float64, queue_size=10)
-        self.ser = rospy.Service('calibrate_battery', SetFloat64, self.update_calibration)
+        self.ser = rospy.Service('calibrate_battery', CalibrateBattery, self.update_calibration)
         
         msg = BatteryState()
 
@@ -65,7 +65,7 @@ class Battery(pigpio.pi):
         data = int.from_bytes(data, byteorder='big')
 
         # Update calibration factor
-        self.factor = req.data / data
+        self.factor = req.voltage / data
 
 
 if __name__ == '__main__':
