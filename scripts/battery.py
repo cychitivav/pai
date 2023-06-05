@@ -16,12 +16,12 @@ class Battery(pigpio.pi):
         if not self.connected:
             rospy.signal_shutdown("Pigpio not connected")
 
-        self.i2c_open(1, 0x08)  # Open i2c bus 1, slave address 0x08 (ATtiny85)
-        self.factor = 24.6/4350  # Calibration factor
+        self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
+        self.factor = 24.6/4350 # Calibration factor
 
         self.pub = rospy.Publisher('/battery', Float64, queue_size=10)
         self.ser = rospy.Service('calibrate_battery', CalibrateBattery, self.update_calibration)
-
+        
         msg = BatteryState()
 
         msg.temperature = Float32("NaN")
@@ -30,9 +30,9 @@ class Battery(pigpio.pi):
         msg.capacity = Float32("NaN")
         msg.design_capacity = Float32(7.8)
 
-        msg.PowerSupplyStatus = 2  # POWER_SUPPLY_STATUS_DISCHARGING
-        msg.PowerSupplyHealth = 0  # POWER_SUPPLY_HEALTH_UNKNOWN
-        msg.PowerSupplyTechnology = 2  # POWER_SUPPLY_TECHNOLOGY_LION
+        msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_DISCHARGING
+        msg.power_supply_health = BatteryState.POWER_SUPPLY_HEALTH_UNKNOWN
+        msg.power_supply_technology = BatteryState.POWER_SUPPLY_TECHNOLOGY_LION
 
         msg.present = True
 
