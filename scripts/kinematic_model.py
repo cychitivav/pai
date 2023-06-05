@@ -19,8 +19,9 @@ class computer:
         alpha_left = np.pi/2
         beta_left = 0
         l_left = 0.115
-
-        # Constraints
+        # Wheel kinematics constraints 
+        # As defined in Autonomous Mobile Robots by Roland Siegwart and Illah Nourbakhsh
+        # Chapter 3.2.3.1
         J1 = np.array([(np.sin(alpha_right+beta_right),  -np.cos(alpha_right+beta_right),    -l_right*np.cos(beta_right)),
                        (np.sin(alpha_left+beta_left),    -np.cos(alpha_left+beta_left),      -l_left*np.cos(beta_left))])
 
