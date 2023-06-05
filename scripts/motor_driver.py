@@ -27,25 +27,31 @@ class Driver(DualMotorDriver):
 
         # Subscriber
         self.sub_front_right = rospy.Subscriber(
-            '/front_wheel_ctrl/command', Float64, self.setSpeedsRosWrapper)
-        #self.sub_front_left = rospy.Subscriber(
-        #    '/back_wheel_ctrl/command', Float64, self.callback_velocity)
+            '/wheel_A_ctrl/command', Float64, self.setSpeedM1RosWrapper)
+        self.sub_front_left = rospy.Subscriber(
+            '/wheel_B_ctrl/command', Float64, self.setSpeedM2RosWrapper)
         
         # Publishers
         self.pub_fault_warning = rospy.Publisher('/fault_warning', Bool, queue_size=10)
-        
+        rospy.loginfo("driver start")
         
 
-    def setSpeedsRosWrapper(self, Float64_msg):
+    def setSpeedM1RosWrapper(self, Float64_msg):
         m1_speed = Float64_msg.data
+        self.motor1.setSpeed(m1_speed)
+        rospy.logdebug("motor 1 speed:" + str(m1_speed))       
+    
+    def setSpeedM2RosWrapper(self, Float64_msg):
         m2_speed = Float64_msg.data
-            
-        self.setSpeeds(self, m1_speed, m2_speed)
+        self.motor2.setSpeed(m2_speed) 
+        rospy.logdebug("motor 2 speed:" + str(m2_speed))
 
     def getFaultRosWrapper(self):
         Bool_msg = Bool
         Bool_msg.data = self.getFault()
+        rospy.logwarn("driver fault detected")
         self.pub_fault_warning(Bool_msg)
+
         
 
 

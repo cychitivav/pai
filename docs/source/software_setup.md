@@ -13,7 +13,7 @@ Follow the ROS installation guide [^ros-install] to install __ROS noetic__.
 
 
 ## Install pigpio lib
-Install the pigpio library with the following commands [^pigpio-install]
+Install the pigpio library with the following commands [^pigpio-install].
 
 ```bash
 apt install unzip
@@ -24,8 +24,58 @@ make
 sudo make install
 ```
 
+## Get project 
+This project is configured as a ROS package. Clone the repo inside your workspace
+
+```
+cd ~/catkin_ws/src
+git clone  https://github.com/cychitivav/pai
+``` 
+
+## Install driver library
+
+```
+cd ~/catkin_ws/src/pai/lib/max14870-driver
+sudo python3 setup.py install
+```
+
 ## Build the ROS package
 
+```
+cd ~/catkin_ws
+catkin build
+```
+## Run robot
+
+```
+roslaunch pai run_robot.launch
+```
+
+```
+rostopic pub /front_right_wheel_ctrl/command std_msgs/Float64 "64.0"
+```
+
+
+```
+rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+  x: 1.0
+  y: 0.0
+  z: 0.0
+angular:
+  x: 0.0
+  y: 0.0
+  z: 0.1
+```
+
+For further configuration check out the Miscellaneous section.
+
+<details>
+  <summary><h2>Miscellaneous configuration </h2></summary>
+  <p>ssh remote.</p>
+  <p>development environment (install vscode).</p>
+  <p>add raspbian apt archive.</p>
+  <p>configure vnc server.</p>
+</details> 
 
 ## References
 
@@ -35,3 +85,4 @@ sudo make install
 
 [^pigpio-install]:[pigpio installation guide](https://abyz.me.uk/rpi/pigpio/download.html)
 
+[^vnc-server-install]:[install and configure vnc on ubuntu 20-04](https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-vnc-on-ubuntu-20-04)

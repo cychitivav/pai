@@ -11,10 +11,11 @@
     />
     
     <!-- Right differential driver  -->
-    <node   name="kinematic_model" 
+    <remap from="/wheel_A_ctrl/command" to="/front_right_wheel_ctrl/command"/>
+    <remap from="/wheel_B_ctrl/command" to="/back_right_wheel_ctrl/command"/>
+    <node   name="right_driver" 
             pkg="pai" output="screen"
-            type="motor_driver.py"
-            <remap from="/front_wheel_ctrl/command" to="/front_right_wheel_ctrl/command"/>
+            type="motor_driver.py"          
     />
 
     
