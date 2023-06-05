@@ -11,9 +11,11 @@ from dual_max14870_rpi import DualMotorDriver
 
 try:
     pin = rospy.get_param('driver_pinout')
+    rospy.logwarn("no 'driver_pinout' param found using default config file")
 except:
     try:
         (pin, namespace) =  rosparam.load_file("./config/driver_L_pinout.yaml", )
+        rospy.logwarn("no default config file using hard coded pinout")
     except:
         pin ={ 'FAULT':23, 'PWM2':24, 'PWM1':12, 'DIR2':16, 'DIR1':20, 'EN': 21}
 
