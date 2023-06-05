@@ -16,7 +16,7 @@ class Battery(pigpio.pi):
         if not self.connected:
             rospy.signal_shutdown("Pigpio not connected")
 
-        self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
+        self.ATtiny85 = self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
         self.factor = 24.6/4350 # Calibration factor
 
         self.pub = rospy.Publisher('/battery', Float64, queue_size=10)
@@ -53,7 +53,7 @@ class Battery(pigpio.pi):
 
     def get_voltage(self):
         # Read int(2 bytes) from slave when it sends data
-        (_, data) = self.i2c_read_device(h, 2)
+        (_, data) = self.i2c_read_device(self.ATtiny85, 2)
         # Convert data to int
         data = int.from_bytes(data, byteorder='big') * self.factor
 
@@ -61,7 +61,7 @@ class Battery(pigpio.pi):
 
     def update_calibration(self, req):
         # Get current battery number
-        (_, data) = self.i2c_read_device(h, 2)
+        (_, data) = self.i2c_read_device(self.ATtiny85, 2)
         data = int.from_bytes(data, byteorder='big')
 
         # Update calibration factor
