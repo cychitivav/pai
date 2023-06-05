@@ -39,8 +39,8 @@ class Battery(pigpio.pi):
         msg.cell_voltage = [Float32("NaN")]*18
         msg.cell_temperature = [Float32("NaN")]*18
 
-        msg.SerialNumber = String("05638")
-        msg.Location = String("Base")
+        msg.serial_number = String("05638")
+        msg.location = String("Base")
 
         rate = rospy.Rate(1/60)
         while not rospy.is_shutdown():
