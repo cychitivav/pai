@@ -2,6 +2,7 @@
 import rospy
 
 from std_msgs.msg import Float64, BatteryState, Float32, String
+from sensor_msgs.msg import BatteryState
 from cob_srvs.srv import SetFloat64, SetFloat64Request  
 
 import pigpio
