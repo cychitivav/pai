@@ -45,7 +45,7 @@ class Motor(object):
 class DualMotorDriver(object):
     MAX_SPEED = _max_speed
 
-    def __init__(self,PWM1 =_pin_M1PWM,DIR1 = _pin_M1DIR , PWM2 =_pin_M2PWM, DIR2= _pin_M2DIR,pin_nFAULT = _pin_nFAULT, pin_nEN= _pin_nEN ):
+    def __init__(self, PWM1 =_pin_M1PWM, DIR1 = _pin_M1DIR , PWM2 =_pin_M2PWM, DIR2= _pin_M2DIR,pin_nFAULT = _pin_nFAULT, pin_nEN= _pin_nEN ):
         self.motor1 = Motor(PWM1, DIR1)
         self.motor2 = Motor(PWM2, DIR2)
         self.pin_nEN = pin_nEN

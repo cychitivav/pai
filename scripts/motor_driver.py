@@ -1,29 +1,25 @@
 #!/usr/bin/python
 import rospy
+import rosparam
 
 from geometry_msgs.msg import Twist
 from std_msgs.msg import Float64, Bool
 
 import numpy as np
 
-#is_sim = rospy.get_param('sim')
-#if not is_sim:
 from dual_max14870_rpi import DualMotorDriver
 
-#PWM1_pin = rospy.get_param('PWM1_pin')
-#PWM2_pin = rospy.get_param('PWM2_pin')
-#dir1_pin = rospy.get_param('dir1_pin')
-#dir2_pin = rospy.get_param('dir2_pin')
-#enable_pin = rospy.get_param('enable_pin')
-#fault_pin = rospy.get_param('fault_pin')
-    
-    
-    
-
+try:
+    pin = rospy.get_param('driver_pinout')
+except:
+    try:
+        (pin, namespace) =  rosparam.load_file("./config/driver_L_pinout.yaml", )
+    except:
+        pin ={ 'FAULT':23, 'PWM2':24, 'PWM1':12, 'DIR2':16, 'DIR1':20, 'EN': 21}
 
 class Driver(DualMotorDriver):
     def __init__(self):
-       
+        super().__init__(pin['PWM1'],pin['DIR1'],pin['PWM2'],pin['DIR2'],pin['FAULT'],pin['EN'])
 
         # Subscriber
         self.sub_front_right = rospy.Subscriber(
@@ -34,6 +30,7 @@ class Driver(DualMotorDriver):
         # Publishers
         self.pub_fault_warning = rospy.Publisher('/fault_warning', Bool, queue_size=10)
         rospy.loginfo("driver start")
+        rospy.loginfo("driver pinout: " +str(pin_out))
         
 
     def setSpeedM1RosWrapper(self, Float64_msg):

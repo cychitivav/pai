@@ -5,22 +5,22 @@ This file is a test 2
 ## Raspbery pin out 
 ![rpi pin out](./imgs/raspberry-pi-3-PWM-pins.png)
 
-driver 1
+driver left
 
-- GND : 34
-- PWM2: 33 (GPIO 13)
-- PWM1: 32 (GPIO 12)
+- FAULT: 37 (GPIO 26)
+- PWM2: 35 (GPIO 19)
+- PWM1: 33 (GPIO 13)
 - DIR2: 31 (GPIO 6)
 - DIR1: 29 (GPIO 5)
-- EN: 26 (GPIO 7)
-- FAULT: 24 (GPIO 8)
+- EN: 15 (GPIO 22)
 
-driver 2
+driver right
 
-- GND : 14
-- PWM2: 13 (GPIO 27)
-- PWM1: 12 (GPIO 18)
-- DIR2: 11 (GPIO 17)
-- DIR1: 10 (GPIO 15)
-- EN: 8 (GPIO 14)
-- FAULT: 7 (GPIO 4 )
+- FAULT: 16 (GPIO 23 )
+- PWM2: 18 (GPIO 24)
+- PWM1: 32 (GPIO 12)
+- DIR2: 36 (GPIO 16)
+- DIR1: 38 (GPIO 20)
+- EN: 40 (GPIO 21)
+
+

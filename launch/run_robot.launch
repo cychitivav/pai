@@ -1,8 +1,8 @@
-
-    <!-- Param 
-    
-     <param name="dynamixel_info"          value="$(find px_robot)/config/joints.yaml"/>
-    -->
+<?xml version="1.0"?>
+<launch>
+  
+     <rosparam file="$(find pai)/config/drivers.yaml" command="load" />
+     
     <!-- Node python scripts -->
     <node   name="kinematic_model" 
             pkg="pai" 
@@ -11,22 +11,28 @@
     />
     
     <!-- Right differential driver  -->
-    <remap from="/wheel_A_ctrl/command" to="/front_right_wheel_ctrl/command"/>
-    <remap from="/wheel_B_ctrl/command" to="/back_right_wheel_ctrl/command"/>
+    <arg name="driver_R"  command="load"   file="$(find pai)/config/driver_R_pinout.yaml" />
     <node   name="right_driver" 
             pkg="pai" output="screen"
-            type="motor_driver.py"          
-    />
+            type="motor_driver.py" 
+        >
+        <param name="driver_pinout"              value="$(arg driver_R)"/>     
+        <remap from="/wheel_A_ctrl/command" to="/front_right_wheel_ctrl/command"/>
+        <remap from="/wheel_B_ctrl/command" to="/back_right_wheel_ctrl/command"/>
+    </node>
 
     
-    <!-- Left differential driver  
-    TODO: ROS paramters set pin 
-    <node   name="kinematic_model" 
+    <!-- Left differential driver  -->
+    <arg name="driver_L"  command="load"   file="$(find pai)/config/driver_R_pinout.yaml" />
+    <node   name="left_driver" 
             pkg="pai" output="screen"
-            type="motor_driver.py"
-            <remap from="/front_wheel_ctrl/command" to="/front_left_wheel_ctrl/command"/>
-            <remap from="/back_wheel_ctrl/command" to="/back_left_wheel_ctrl/command"/> 
-    />
-    -->
+            type="motor_driver.py"     
+     >
+        <param name="driver_pinout"              value="$(arg driver_L)"/>         
+        <remap from="/wheel_A_ctrl/command" to="/front_left_wheel_ctrl/command"/>
+        <remap from="/wheel_B_ctrl/command" to="/back_left_wheel_ctrl/command"/>    
+    </node>
+
     
 
+</launch>

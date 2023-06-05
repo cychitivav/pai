@@ -52,19 +52,19 @@ roslaunch pai run_robot.launch
 ```
 
 ```
-rostopic pub /front_right_wheel_ctrl/command std_msgs/Float64 "64.0"
+rostopic pub  -r 0.5 /front_right_wheel_ctrl/command std_msgs/Float64 "64.0"
 ```
 
 
 ```
-rostopic pub /cmd_vel geometry_msgs/Twist "linear:
+rostopic pub -r 0.5 /cmd_vel geometry_msgs/Twist "linear:
   x: 1.0
   y: 0.0
   z: 0.0
 angular:
   x: 0.0
   y: 0.0
-  z: 0.1
+  z: 0.1"
 ```
 
 For further configuration check out the Miscellaneous section.
@@ -72,7 +72,7 @@ For further configuration check out the Miscellaneous section.
 <details>
   <summary><h2>Miscellaneous configuration </h2></summary>
   <p>ssh remote.</p>
-  <p>development environment (install vscode).</p>
+  <p>development environment (install vscode and list of vscode extensions).</p>
   <p>add raspbian apt archive.</p>
   <p>configure vnc server.</p>
 </details> 
