@@ -19,7 +19,7 @@ class Battery(pigpio.pi):
         self.ATtiny85 = self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
         self.factor = 24.6/4350 # Calibration factor
 
-        self.pub = rospy.Publisher('/battery', Float64, queue_size=10)
+        self.pub = rospy.Publisher('/battery', BatteryState, queue_size=10)
         self.ser = rospy.Service('calibrate_battery', CalibrateBattery, self.update_calibration)
         
         msg = BatteryState()
