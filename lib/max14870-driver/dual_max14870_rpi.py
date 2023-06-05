@@ -49,7 +49,7 @@ class DualMotorDriver(object):
         self.motor1 = Motor(PWM1, DIR1)
         self.motor2 = Motor(PWM2, DIR2)
         self.pin_nEN = pin_nEN
-        self.pin_nFAUlt = pin_nFAUlt 
+        self.pin_nFAULT = pin_nFAULT 
         _pi.set_pull_up_down(pin_nFAULT, pigpio.PUD_UP) # make sure nFAULT is pulled up
         _pi.write(pin_nEN, 0) # enable drivers by default
 
@@ -58,13 +58,13 @@ class DualMotorDriver(object):
         self.motor2.setSpeed(m2_speed)
 
     def getFault(self):
-        return not _pi.read(self.pin_nFAUlt)
+        return not _pi.read(self.pin_nFAULT)
 
     def enable(self):
         _pi.write(self.pin_nEN, 0)
 
     def disable(self):
-        _pi.write(self.pin_nFAUlt, 1)
+        _pi.write(self.pin_nFAULT, 1)
 
     def forceStop(self):
         # reinitialize the pigpio interface in case we interrupted another command
