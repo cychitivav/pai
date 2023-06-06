@@ -10,7 +10,7 @@
     />
     
     <!-- Right differential driver  -->
-    <arg name="driver_R"  command="load"   file="$(find pai)/config/driver_R_pinout.yaml" />
+    <rosparam file="$(find pai)/config/driver_R_pinout.yaml" command="load" />
     <node   name="right_driver" 
             pkg="pai" output="screen"
             type="motor_driver.py" 
@@ -22,7 +22,7 @@
 
     
     <!-- Left differential driver  -->
-    <arg name="driver_L"  command="load"   file="$(find pai)/config/driver_R_pinout.yaml" />
+    <rosparam file="$(find pai)/config/driver_L_pinout.yaml" command="load" />
     <node   name="left_driver" 
             pkg="pai" output="screen"
             type="motor_driver.py"     
