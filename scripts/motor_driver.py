@@ -1,11 +1,13 @@
 #!/usr/bin/python
+import sys
+
 import pigpio
 import rospy
 from std_msgs.msg import Bool, Float64
 
 
 class Motor():
-    MAX_SPEED = _max_speed
+    MAX_SPEED = 160 * (2*3.14/60)  # 160 rpm
 
     def __init__(self, pwm_pin: int, dir_pin: int, pi: pigpio.pi):
         self.pi = pi
@@ -30,7 +32,7 @@ class Motor():
 
 class DualMotorDriver():
 
-    def __init__(self, host='localhost', **pin_out):
+    def __init__(self, host='localhost', pin_out: dict = {'FAULT': 23, 'PWM2': 24, 'PWM1': 12, 'DIR2': 16, 'DIR1': 20, 'EN': 21}):
         rospy.init_node("Driver", anonymous=True)
 
         # Initialize pigpio
@@ -41,7 +43,7 @@ class DualMotorDriver():
 
         # Initialize motors
         self.motorA = Motor(pin_out['PWM1'], pin_out['DIR1'], self.pi)
-        self.motorB = Motor(pin_out['PWM2'], pin_out['DIR2'], self.pi) 
+        self.motorB = Motor(pin_out['PWM2'], pin_out['DIR2'], self.pi)
 
         # Initialize fault pin
         self.pin_FAULT = pin_out['FAULT']
@@ -89,7 +91,6 @@ class DualMotorDriver():
 
 
 if __name__ == '__main__':
-    pins = rospy.get_param(sys.argv[1],
-                           {'FAULT': 23, 'PWM2': 24, 'PWM1': 12, 'DIR2': 16, 'DIR1': 20, 'EN': 21})
-    DualMotorDriver(pins)
+    pins = rospy.get_param(sys.argv[2])
+    DualMotorDriver(host=sys.argv[1], pin_out=pins)
     rospy.spin()
