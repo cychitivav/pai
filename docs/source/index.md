@@ -3,7 +3,7 @@ This file is a test 2
 
 
 ## Raspbery pin out 
-![rpi pin out](./imgs/raspberry-pi-3-PWM-pins.png)
+![rpi pin out](https://github.com/cychitivav/pai/assets/30636259/018453a2-3278-494c-a706-0de937c5933a)
 
 driver left
 
