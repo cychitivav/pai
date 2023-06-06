@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
 <launch>
   
-     <rosparam file="$(find pai)/config/drivers.yaml" command="load" />
      
     <!-- Node python scripts -->
     <node   name="kinematic_model" 
