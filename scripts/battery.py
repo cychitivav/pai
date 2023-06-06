@@ -41,7 +41,7 @@ class Battery(pigpio.pi):
         msg.serial_number = '05638'
         msg.location = 'Base'
 
-        rate = rospy.Rate(1)
+        rate = rospy.Rate(1/60) # Once per minute
         while not rospy.is_shutdown():
             msg.header.stamp = rospy.Time.now()
 
@@ -68,8 +68,10 @@ class Battery(pigpio.pi):
         if data:
             self.factor = req.voltage / data
 
-            rospy.loginfo("Battery voltage: %f", self.get_voltage())
-            rospy.loginfo("Battery percentage: %f", self.get_voltage()/25.2)
+            rospy.loginfo("Battery calibrated:\n\
+                           \tBattery voltage: %f\n\
+                           \tBattery percentage: %f", req.voltage, req.voltage/25.2)
+            rospy.logdebug("Calibration factor updated to %f", self.factor)
         else:
             rospy.logerr("Battery number is 0, check battery connection")
 
