@@ -29,7 +29,7 @@ This project is configured as a ROS package. Clone the repo inside your workspac
 
 ```
 cd ~/catkin_ws/src
-git clone  https://github.com/cychitivav/pai
+git clone --recurse-submodules  https://github.com/cychitivav/pai
 ``` 
 
 ## Install driver library
