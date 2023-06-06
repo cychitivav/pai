@@ -15,7 +15,6 @@
             pkg="pai" output="screen"
             type="motor_driver.py" 
         >
-        <param name="driver_pinout"              value="$(arg driver_R)"/>     
         <remap from="/wheel_A_ctrl/command" to="/front_right_wheel_ctrl/command"/>
         <remap from="/wheel_B_ctrl/command" to="/back_right_wheel_ctrl/command"/>
     </node>
@@ -26,8 +25,7 @@
     <node   name="left_driver" 
             pkg="pai" output="screen"
             type="motor_driver.py"     
-     >
-        <param name="driver_pinout"              value="$(arg driver_L)"/>         
+     >   
         <remap from="/wheel_A_ctrl/command" to="/front_left_wheel_ctrl/command"/>
         <remap from="/wheel_B_ctrl/command" to="/back_left_wheel_ctrl/command"/>    
     </node>
