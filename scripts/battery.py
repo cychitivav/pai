@@ -1,7 +1,6 @@
 #!/usr/bin/python
 import rospy
 
-from std_msgs.msg import Float64, Float32, String
 from sensor_msgs.msg import BatteryState
 from pai.srv import CalibrateBattery
 
@@ -14,7 +13,7 @@ class Battery(pigpio.pi):
 
         super().__init__()
         if not self.connected:
-            rospy.signal_shutdown("Pigpio not connected")
+            rospy.signal_shutdown("Pigpio not connected, run 'sudo pigpiod'")
 
         self.ATtiny85 = self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
         self.factor = 24.6/435 # Calibration factor
@@ -24,11 +23,11 @@ class Battery(pigpio.pi):
         
         msg = BatteryState()
 
-        msg.temperature = Float32("NaN")
-        msg.current = Float32("NaN")
-        msg.charge = Float32("NaN")
-        msg.capacity = Float32("NaN")
-        msg.design_capacity = Float32(7.8)
+        msg.temperature = float('nan')
+        msg.current = float('nan')
+        msg.charge = float('nan')
+        msg.capacity = float('nan')
+        msg.design_capacity = 7.8
 
         msg.power_supply_status = BatteryState.POWER_SUPPLY_STATUS_DISCHARGING
         msg.power_supply_health = BatteryState.POWER_SUPPLY_HEALTH_UNKNOWN
@@ -36,17 +35,18 @@ class Battery(pigpio.pi):
 
         msg.present = True
 
-        msg.cell_voltage = [Float32("NaN")]*18
-        msg.cell_temperature = [Float32("NaN")]*18
+        msg.cell_voltage = [float('nan')]*18
+        msg.cell_temperature = [float('nan')]*18
 
-        msg.serial_number = String("05638")
-        msg.location = String("Base")
+        msg.serial_number = '05638'
+        msg.location = 'Base'
 
-        rate = rospy.Rate(1/60)
+        rate = rospy.Rate(1)
         while not rospy.is_shutdown():
-            voltage = self.get_voltage()
-            msg.voltage = Float32(voltage)
-            msg.percentage = Float32(voltage/25.2)
+            msg.header.stamp = rospy.Time.now()
+
+            msg.voltage = self.get_voltage()
+            msg.percentage = msg.voltage/25.2
 
             self.pub.publish(msg)
             rate.sleep()
@@ -54,7 +54,7 @@ class Battery(pigpio.pi):
     def get_voltage(self):
         # Read int(2 bytes) from slave when it sends data
         (_, data) = self.i2c_read_device(self.ATtiny85, 2)
-        # Convert data to int
+        # Convert bytes to float
         data = int.from_bytes(data, byteorder='big') * self.factor
 
         return data
