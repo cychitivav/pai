@@ -9,7 +9,7 @@
   - ATtiny85
 
   Connections:
-  - Connect battery voltage to PB2 (ADC1)
+  - Connect battery voltage to PB3 (ADC3)
   - Connect SDA to PB0
   - Connect SCL to PB2
   - Connect GND to GND
