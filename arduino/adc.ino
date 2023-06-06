@@ -23,12 +23,27 @@
     https://github.com/lucullusTheOnly/TinyWire
 
   Programming:
-  - Connect ATtiny85 to Arduino Uno
-  - Upload ArduinoISP sketch to Arduino Uno
-  - Select "Arduino as ISP" programmer
-  - Burn bootloader
-  - Select "Arduino as ISP" programmer
-  - Upload this sketch
+  1. Set up Arduino IDE for ATtiny85:
+    https://raw.githubusercontent.com/damellis/attiny/ide-1.6.x-boards-manager/package_damellis_attiny_index.json
+
+  2. Upload ArduinoISP sketch to Arduino:
+    File > Examples > ArduinoISP
+  
+  3. Set up Arduino IDE for ATtiny85:
+    Tools > Board > ATtiny25/45/85
+    Tools > Processor > ATtiny85
+    Tools > Clock > 8 MHz (internal)
+    Tools > Programmer > Arduino as ISP
+
+  4. Connect Arduino to ATtiny85:
+    Arduino 5V > ATtiny85 VCC
+    Arduino GND > ATtiny85 GND
+    Arduino 10 > ATtiny85 Reset
+    Arduino 11 > ATtiny85 PB0
+    Arduino 12 > ATtiny85 PB1
+    Arduino 13 > ATtiny85 PB2
+
+  5. Upload code to ATtiny85
 
   Created by Cristian Chitiva (cychitivav@unal.edu.co)
   Last updated on Jun/5/2023
