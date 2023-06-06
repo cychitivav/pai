@@ -11,7 +11,6 @@ RUN apt-get update && \
 
 RUN source /opt/ros/noetic/setup.bash
 
-
 WORKDIR /root/catkin_ws/
 
 CMD ["bash"]
