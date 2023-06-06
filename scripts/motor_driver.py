@@ -47,6 +47,6 @@ class Driver(DualMotorDriver):
 
 
 if __name__ == '__main__':
-    rospy.init_node("Computer", anonymous=True)
+    rospy.init_node("Driver", anonymous=True)
     Driver()
     rospy.spin()
