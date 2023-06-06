@@ -1,0 +1,7 @@
+# GPIO pin number
+FAULT: 23 
+PWM2: 24
+PWM1: 12
+DIR2: 16
+DIR1: 20
+EN: 21

@@ -162,6 +162,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/kinematic_model.py
   scripts/battery.py
+  scripts/motor_driver.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

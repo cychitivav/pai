@@ -38,7 +38,9 @@ jobs:
         run: pip install --upgrade -r docs/requirements.txt
       
       - name: Install latex
-        run: sudo apt-get install texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk
       
       - name: Build the docs
         run: |
