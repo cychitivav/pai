@@ -1,0 +1,3 @@
+[submodule "lib/max14870-driver"]
+	path = lib/max14870-driver
+	url = https://github.com/jsduenass/dual-max14870-motor-driver-rpi.git
