@@ -1,26 +1,28 @@
 #!/usr/bin/python
-import rospy
-
-from sensor_msgs.msg import BatteryState
-from pai.srv import CalibrateBattery, CalibrateBatteryResponse
+import sys
 
 import pigpio
+import rospy
+from sensor_msgs.msg import BatteryState
+
+from pai.srv import CalibrateBattery, CalibrateBatteryResponse
 
 
-class Battery(pigpio.pi):
-    def __init__(self):
+class Battery():
+    def __init__(self, host='localhost'):
         rospy.init_node('Battery', anonymous=True)
 
-        super().__init__()
-        if not self.connected:
+        self.pi = pigpio.pi(host)
+        if not self.pi.connected and not rospy.is_shutdown():
             rospy.signal_shutdown("Pigpio not connected, run 'sudo pigpiod'")
+            exit()
 
-        self.ATtiny85 = self.i2c_open(1, 0x08) # Open i2c bus 1, slave address 0x08 (ATtiny85)
-        self.factor = 24.6/435 # Calibration factor
+        self.ATtiny85 = self.pi.i2c_open(1, 0x08)  # Open i2c bus 1, slave address 0x08 (ATtiny85)
+        self.factor = 24.6/435  # Calibration factor
 
         self.pub = rospy.Publisher('/battery', BatteryState, queue_size=10)
         self.ser = rospy.Service('/calibrate_battery', CalibrateBattery, self.update_calibration)
-        
+
         msg = BatteryState()
 
         msg.temperature = float('nan')
@@ -41,7 +43,7 @@ class Battery(pigpio.pi):
         msg.serial_number = '05638'
         msg.location = 'Base'
 
-        rate = rospy.Rate(1/60) # Once per minute
+        rate = rospy.Rate(1/60)  # Once per minute
         while not rospy.is_shutdown():
             msg.header.stamp = rospy.Time.now()
 
@@ -53,15 +55,16 @@ class Battery(pigpio.pi):
 
     def get_voltage(self):
         # Read int(2 bytes) from slave when it sends data
-        (_, data) = self.i2c_read_device(self.ATtiny85, 2)
+        (_, data) = self.pi.i2c_read_device(self.ATtiny85, 2)
         # Convert bytes to float
         data = int.from_bytes(data, byteorder='big') * self.factor
+        rospy.logdebug("Battery voltage: %f", data)
 
         return data
 
     def update_calibration(self, req):
         # Get current battery number
-        (_, data) = self.i2c_read_device(self.ATtiny85, 2)
+        (_, data) = self.pi.i2c_read_device(self.ATtiny85, 2)
         data = int.from_bytes(data, byteorder='big')
 
         # Update calibration factor
@@ -78,7 +81,10 @@ class Battery(pigpio.pi):
         return CalibrateBatteryResponse()
 
 
-
 if __name__ == '__main__':
-    Battery()
+    if len(sys.argv) > 1:
+        Battery(sys.argv[1])
+    else:
+        Battery()
+
     rospy.spin()
