@@ -2,7 +2,7 @@
 import rospy
 
 from sensor_msgs.msg import BatteryState
-from pai.srv import CalibrateBattery
+from pai.srv import CalibrateBattery, CalibrateBatteryResponse
 
 import pigpio
 
@@ -65,10 +65,16 @@ class Battery(pigpio.pi):
         data = int.from_bytes(data, byteorder='big')
 
         # Update calibration factor
-        self.factor = req.voltage / data
-        rospy.loginfo("Calibration factor updated to %f", self.factor)
-        rospy.loginfo("Battery voltage: %f", self.get_voltage())
-        rospy.loginfo("Battery percentage: %f", self.get_voltage()/25.2)
+        if data:
+            self.factor = req.voltage / data
+
+            rospy.loginfo("Battery voltage: %f", self.get_voltage())
+            rospy.loginfo("Battery percentage: %f", self.get_voltage()/25.2)
+        else:
+            rospy.logerr("Battery number is 0, check battery connection")
+
+        return CalibrateBatteryResponse()
+
 
 
 if __name__ == '__main__':
