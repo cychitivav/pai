@@ -80,7 +80,7 @@ In order to avoid installing ROS on your local machine, we will be using a docke
 
 1. Clone the repo
 	```bash
-	git clone https://github.com/cychitivav/pai.git
+	git clone --recurse-submodules https://github.com/cychitivav/pai.git
 	```
 2. Build the docker image
 	```bash
