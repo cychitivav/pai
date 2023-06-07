@@ -91,6 +91,9 @@ class DualMotorDriver():
 
 
 if __name__ == '__main__':
-    pins = rospy.get_param(sys.argv[2])
-    DualMotorDriver(host=sys.argv[1], pin_out=pins)
+    if len(sys.argv) > 2:
+        pins = rospy.get_param(sys.argv[2])
+        DualMotorDriver(host=sys.argv[1], pin_out=pins)
+    else: 
+        DualMotorDriver()
     rospy.spin()
