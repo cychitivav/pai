@@ -11,16 +11,11 @@ RUN apt-get update && \
 
 RUN echo "source /opt/ros/noetic/setup.bash" >> ~/.bashrc
 
-# Install pigpio
-RUN apt-get install -y wget unzip && \
-    wget https://github.com/joan2937/pigpio/archive/master.zip && \
-    unzip master.zip && \
-    cd pigpio-master && \
-    make && \
-    make install && \
-    cd .. && \
-    rm -rf pigpio-master && \
-    rm master.zip
+# Install pip tools 
+RUN apt-get install -y python3-pip
+
+# Install pigpio python module
+RUN pip3 install pigpio
 
 WORKDIR /root/catkin_ws/
 
