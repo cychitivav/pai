@@ -8,8 +8,8 @@ driver_L:
   EN: 22
 
 driver_R:
-  FAULT: 23 
-  PWM2: 24
+  FAULT: 15
+  PWM2: 18
   PWM1: 12
   DIR2: 16
   DIR1: 20

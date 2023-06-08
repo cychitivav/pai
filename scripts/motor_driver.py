@@ -22,12 +22,12 @@ class Motor():
         else:
             dir_value = 0
 
-        if speed > MAX_SPEED:
-            speed = MAX_SPEED
+        if speed > self.MAX_SPEED:
+            speed = self.MAX_SPEED
 
         self.pi.write(self.dir_pin, dir_value)
         # 20 kHz PWM, duty cycle in range 0-1000000 as expected by pigpio
-        self.pi.hardware_PWM(self.pwm_pin, 20000, int(speed * 6250 / 3))
+        self.pi.hardware_PWM(self.pwm_pin, 20000, int(speed *1000))
 
 
 class DualMotorDriver():
