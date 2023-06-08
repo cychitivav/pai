@@ -55,9 +55,7 @@ class DualMotorDriver():
 
         # Subscriber
         self.sub_front_right = rospy.Subscriber(
-            '/motor_A_ctrl/command', Float64, self.set_speed_M1)
-        self.sub_front_left = rospy.Subscriber(
-            '/motor_B_ctrl/command', Float64, self.set_speed_M2)
+            '/motors_ctrl/command', Float64, self.set_speeds)
 
         # Publishers
         self.pub_fault_warning = rospy.Publisher('/fault_warning', Bool, queue_size=10)
@@ -65,15 +63,11 @@ class DualMotorDriver():
         rospy.loginfo("Driver start")
         rospy.loginfo("Driver pinout: " + str(pin_out))
 
-    def set_speed_M1(self, Float64_msg):
-        m1_speed = Float64_msg.data
-        self.motorA.set_speed(m1_speed)
-        rospy.logdebug("Motor 1 speed:" + str(m1_speed))
-
-    def set_speed_M2(self, Float64_msg):
-        m2_speed = Float64_msg.data
-        self.motorB.set_speed(m2_speed)
-        rospy.logdebug("motor 2 speed:" + str(m2_speed))
+    def set_speeds(self, Float64_msg):
+        speed = Float64_msg.data
+        self.motorA.set_speed(speed)
+        self.motorB.set_speed(speed)
+        rospy.logdebug("Motor speed:" + str(m1_speed))
 
     def get_fault(self):
         Bool_msg = Bool(self.getFault())
