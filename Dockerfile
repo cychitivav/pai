@@ -17,6 +17,9 @@ RUN apt-get install -y python3-pip
 # Install pigpio python module
 RUN pip3 install pigpio
 
+# Install ros control dependencies for simulation
+RUN apt-get install -y ros-noetic-ros-control ros-noetic-ros-controllers
+
 WORKDIR /root/catkin_ws/
 
 CMD ["bash"]
