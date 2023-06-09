@@ -22,9 +22,10 @@ class Motor():
         else:
             dir_value = 0
 
-        if speed > MAX_SPEED:
-            speed = MAX_SPEED
+        if speed > self.MAX_SPEED:
+            speed = self.MAX_SPEED
 
+        # Set direction
         self.pi.write(self.dir_pin, dir_value)
         
         # Set range to 0-100
