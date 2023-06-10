@@ -17,3 +17,7 @@ slprj
 # build artifacts
 build/
 _build/
+
+# KiCad files
+*bak
+*cache
