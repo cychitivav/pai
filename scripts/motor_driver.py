@@ -7,7 +7,7 @@ from std_msgs.msg import Bool, Float64
 
 
 class Motor():
-    MAX_SPEED = 160 * (2*3.14/60)  # 160 rpm
+    MAX_SPEED = 100#160 * (2*3.14/60)  # 160 rpm
 
     def __init__(self, pwm_pin: int, dir_pin: int, pi: pigpio.pi):
         self.pi = pi
@@ -22,12 +22,20 @@ class Motor():
         else:
             dir_value = 0
 
-        if speed > MAX_SPEED:
-            speed = MAX_SPEED
+        if speed > self.MAX_SPEED:
+            speed = self.MAX_SPEED
 
+        # Set direction
         self.pi.write(self.dir_pin, dir_value)
-        # 20 kHz PWM, duty cycle in range 0-1000000 as expected by pigpio
-        self.pi.hardware_PWM(self.pwm_pin, 20000, int(speed * 6250 / 3))
+        
+        # Set range to 0-100
+        self.pi.set_PWM_range(self.pwm_pin, 100)
+
+        # Set frequency to 8kHz
+        self.pi.set_PWM_frequency(self.pwm_pin, 8000)
+
+        # Set duty cycle to speed
+        self.pi.set_PWM_dutycycle(self.pwm_pin, speed)
 
 
 class DualMotorDriver():
