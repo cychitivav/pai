@@ -4,18 +4,18 @@ joint_state_controller:
   publish_rate: 30
 
 # Velocity controllers
-left_back_ctrl:
+back_left_ctrl:
   type: velocity_controllers/JointVelocityController
-  joint: left_back_joint
+  joint: back_left_joint
 
-right_back_ctrl:
+back_right_ctrl:
   type: velocity_controllers/JointVelocityController
-  joint: right_back_joint
+  joint: back_right_joint
 
-left_front_ctrl:
+front_left_ctrl:
   type: velocity_controllers/JointVelocityController
-  joint: left_front_joint
+  joint: front_left_joint
 
-right_front_ctrl:
+front_right_ctrl:
   type: velocity_controllers/JointVelocityController
-  joint: right_front_joint
+  joint: front_right_joint
