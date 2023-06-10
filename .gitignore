@@ -6,17 +6,22 @@
 *.pyc
 *.py[cod]
 *$py.class
+*/build
+*/dist
 
-# MATLAB temporal files
+# MATLAB temporary files
 *.asv
 *.slxc
-slprj
+*slprj
 
-## temporal office files
+# Temporary office files
 ~$* 
+
 # build artifacts
-build/
-_build/
+*build/
+
+# WSL files
+*.Identifier
 
 # KiCad files
 *bak

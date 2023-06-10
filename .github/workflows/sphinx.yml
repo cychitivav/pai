@@ -1,39 +1,72 @@
 #  Simple workflow for deploying from sphinx to GitHub Pages
-name: Sphinx build
+name: Sphinx build and deployment
 
 on: 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  push:
-    branches:
-      - main
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v1
-        with:
-          python-version: 3.8
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Install dependencies with pip
-        run: pip install --no-warn-script-location --user --upgrade -r docs/requirements.txt
+        run: pip install --upgrade -r docs/requirements.txt
+
       - name: Build the docs
         run: |
           cd docs 
-          make html # && make latexpdf
-      
-      - name: Check style
+          make test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies with pip
+        run: pip install --upgrade -r docs/requirements.txt
+
+      - name: Build the docs
         run: |
           cd docs 
-          make test
+          make html
 
-      # push the generated content into the `main` (former `master`) branch.
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3.8.0
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
         with:
-          github_token: ${{ secrets.GHPAGES_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./docs/build/html
+          name: webapp
+          path: ./docs/build/html/
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: webapp
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          # Upload entire repository
+          path: './webapp'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
