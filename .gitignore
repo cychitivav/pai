@@ -20,4 +20,5 @@ _build/
 
 # KiCad files
 *bak
+*backup*
 *cache
