@@ -37,10 +37,14 @@ jobs:
       - name: Install dependencies with pip
         run: pip install --upgrade -r docs/requirements.txt
       
-      - name: Install latex
+      - name: Install latex and fonts
         run: |
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk
+          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk texlive-lang-spanish
+
+          mkdir -p ~/.local/share/
+          cp -r docs/source/fonts ~/.local/share/
+          fc-cache -f -v
       
       - name: Build the docs
         run: |
