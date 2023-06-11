@@ -26,8 +26,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install dependencies with pip
-        run: pip install --upgrade -r docs/requirements.txt
+      - name: Install doc8
+        run: pip install doc8
 
       - name: Build the docs
         run: |
@@ -40,7 +40,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-
 
       - name: Install dependencies with pip
         run: pip install --upgrade -r docs/requirements.txt
@@ -63,4 +62,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: pdf
-          path: ./docs/build/latex/pai.pdf
+          path: ./docs/build/latex/vehculodemuestro.pdf
