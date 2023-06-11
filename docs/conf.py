@@ -47,11 +47,11 @@ latex_documents = [(
     project,
     author.replace(', ', '\\and '),
     'howto',
-    False
+    True
     )
 ]
 
-latex_logo = 'images/logounal.png'
+latex_logo = 'source/images/logounal.png'
 latex_toplevel_sectioning = 'section'
 latex_show_urls = 'footnote'
 

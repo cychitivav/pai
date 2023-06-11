@@ -1,5 +1,5 @@
-#  Simple workflow for deploying from sphinx to GitHub Pages
-name: Sphinx build and deployment
+#  Simple workflow for get the latex pdf
+name: Sphinx pdf
 
 on: 
   # Allows you to run this workflow manually from the Actions tab
@@ -25,6 +25,7 @@ jobs:
         run: |
           cd docs 
           make test
+  
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -32,41 +33,26 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
+
       - name: Install dependencies with pip
         run: pip install --upgrade -r docs/requirements.txt
+      
+      - name: Install latex and fonts
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk texlive-lang-spanish
 
+          mkdir -p ~/.local/share/
+          cp -r docs/source/fonts ~/.local/share/
+          fc-cache -f -v
+      
       - name: Build the docs
         run: |
-          cd docs 
-          make html
-
+          cd docs
+          make latexpdf
+          
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
-          name: webapp
-          path: ./docs/build/html/
-
-  deploy:
-    needs: build
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v1
-        with:
-          name: webapp
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v3
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          # Upload entire repository
-          path: './webapp'
-      
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
+          name: pdf
+          path: ./docs/build/latex/pai.pdf
