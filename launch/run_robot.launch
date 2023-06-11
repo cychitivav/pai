@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<launch>
+    <arg name="host" default="localhost" />
+    <!-- Node python scripts -->
+    <node name="kinematic_model"
+        pkg="pai"
+        output="screen"
+        type="kinematic_model.py"
+    />
+
+    <!-- Drivers -->
+    <rosparam file="$(find pai)/config/drivers_pinout.yaml" command="load" />
+
+    <!-- Right differential driver  -->
+    <node name="right_driver"
+        pkg="pai" output="screen"
+        type="motor_driver.py"
+        args="$(arg host) driver_R"
+        required="true"
+    >
+        <remap from="/motor_A_ctrl/command" to="/front_right_wheel_ctrl/command" />
+        <remap from="/motor_B_ctrl/command" to="/back_right_wheel_ctrl/command" />
+    </node>
+
+    <!-- Left differential driver  -->
+    <node name="left_driver"
+        pkg="pai" output="screen"
+        type="motor_driver.py"
+        args="$(arg host) driver_L"
+        required="true"
+    >
+        <remap from="/motor_A_ctrl/command" to="/front_left_wheel_ctrl/command" />
+        <remap from="/motor_B_ctrl/command" to="/back_left_wheel_ctrl/command" />
+    </node>
+</launch>

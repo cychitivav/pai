@@ -1,0 +1,54 @@
+#  Simple workflow for get the latex pdf
+name: Sphinx pdf
+
+on: 
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies with pip
+        run: pip install --upgrade -r docs/requirements.txt
+
+      - name: Build the docs
+        run: |
+          cd docs 
+          make test
+  
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+
+      - name: Install dependencies with pip
+        run: pip install --upgrade -r docs/requirements.txt
+      
+      - name: Install latex
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-fonts-recommended texlive-fonts-extra texlive-latex-extra latexmk
+      
+      - name: Build the docs
+        run: |
+          cd docs
+          make latexpdf
+          
+      - name: Upload artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: pdf
+          path: ./docs/build/latex/pai.pdf

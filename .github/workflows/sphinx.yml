@@ -4,10 +4,6 @@ name: Sphinx build and deployment
 on: 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
-  push:
-    branches:
-      - main 
-      - docs/*
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -16,7 +12,7 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -28,48 +24,39 @@ jobs:
       - name: Build the docs
         run: |
           cd docs 
-          make html # && make latexpdf
-      
-      - name: Check style
+          make test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install dependencies with pip
+        run: pip install --upgrade -r docs/requirements.txt
+
+      - name: Build the docs
         run: |
           cd docs 
-          make test
+          make html
 
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
-          name: webapp-artifact
+          name: webapp
           path: ./docs/build/html/
 
-  upload:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v1
-        with:
-          name: webapp-artifact
-
-      - name: Upload to gh-pages branch
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GHPAGES_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: ./webapp-artifact
-
-      - run: touch .nojekyll
-
   deploy:
-    needs: upload
+    needs: build
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: 
-        uses: actions/checkout@v3
+      - name: Download artifact
+        uses: actions/download-artifact@v1
         with:
-          ref: gh-pages
+          name: webapp
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -78,7 +65,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload entire repository
-          path: '.'
+          path: './webapp'
       
       - name: Deploy to GitHub Pages
         id: deployment

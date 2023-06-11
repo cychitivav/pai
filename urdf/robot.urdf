@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<robot name="ugv" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <!-- Parameters -->
+    <xacro:property name="BH" value="0.224" />       <!-- Base Height -->
+    <xacro:property name="BW" value="0.5" />       <!-- Base Width -->
+    <xacro:property name="BL" value="0.824" />       <!-- Base Length -->
+    <xacro:property name="WR" value="${5*0.0254}" /> <!-- Wheel radius -->
+    <xacro:property name="WW" value="0.084" />       <!-- Wheel width -->
+    <xacro:property name="F" value="0.097" />        <!-- Distance from floor -->
+    <xacro:property name="L" value="0.2325" />       <!-- Distance from center to wheel -->
+
+    <!-- Reference Frame (link 0) -->
+    <link name="world" />
+
+    <!-- BASE -->
+    <joint name="base_joint" type="fixed">
+        <origin xyz="0.0 0.0 0.0" />
+        <parent link="world" />
+        <child link="base_link" />
+    </joint>
+
+    <link name="base_link">
+        <inertial>
+            <mass value="1.0" />
+            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+        </inertial>
+        <visual>
+            <origin xyz="-0.3 0.0 ${BH/2 + F}" rpy="0.0 0.0 ${-pi/2}" />
+            <geometry>
+                <mesh filename="package://pai/meshes/box.dae" />
+            </geometry>
+        </visual>
+
+        <collision>
+            <origin xyz="0.0 0.0 ${BH/2 + F}" rpy="0.0 0.0 0.0" />
+            <geometry>
+                <box size="${BL} ${BW-0.01} ${BH}" />
+            </geometry>
+        </collision>
+    </link>
+
+
+    <xacro:macro name="wheel" params="location base_link:=base_link *origin">
+        <link name="${location}_link">
+            <inertial>
+                <mass value="1.6" />
+                <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            </inertial>
+
+            <visual>
+                <origin xyz="0.0 0.0 0.0" rpy="${-pi/2} 0.0 0.0" />
+                <geometry>
+                    <mesh filename="package://pai/meshes/wheel.dae" />
+                </geometry>
+            </visual>
+
+            <collision>
+                <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+                <geometry>
+                    <cylinder radius="${WR}" length="${WW}" />
+                </geometry>
+            </collision>
+        </link>
+
+        <joint name="${location}_joint" type="continuous">
+            <xacro:insert_block name="origin" />
+            <parent link="${base_link}" />
+            <child link="${location}_link" />
+            <axis xyz="0 0 1" />
+        </joint>
+
+        <transmission name="${location}_transmission">
+            <type>transmission_interface/SimpleTransmission</type>
+            <joint name="${location}_joint">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+            </joint>
+            <actuator name="${location}_motor">
+                <hardwareInterface>hardware_interface/VelocityJointInterface</hardwareInterface>
+                <mechanicalReduction>1</mechanicalReduction>
+            </actuator>
+        </transmission>
+    </xacro:macro>
+
+    <xacro:wheel location="front_right">
+        <origin xyz="${L} ${-BW/2 - WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+    </xacro:wheel>
+
+    <xacro:wheel location="back_right">
+        <origin xyz="${-L} ${-BW/2 - WW/2} ${WR}" rpy="${-pi/2} 0.0 0.0" />
+    </xacro:wheel>
+
+    <xacro:wheel location="front_left">
+        <origin xyz="${L} ${BW/2 + WW/2} ${WR}" rpy="${pi/2} 0.0 0.0" />
+    </xacro:wheel>
+
+    <xacro:wheel location="back_left">
+        <origin xyz="${-L} ${BW/2 + WW/2} ${WR}" rpy="${pi/2} 0.0 0.0" />
+    </xacro:wheel>
+
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
+</robot>
