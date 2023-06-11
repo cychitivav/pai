@@ -13,13 +13,13 @@ version = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-extensions = ['myst_parser']  # , 'myst_nb']
+extensions = ['myst_nb']
 
-# source_suffix = {
-#     '.rst': 'restructuredtext',
-#     '.md': 'markdown',
-#     'ipynb': 'myst-nb'
-# }
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'myst-nb',
+    '.ipynb': 'myst-nb',
+}
 
 numfig = True
 
@@ -41,19 +41,11 @@ html_search_language = 'es'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
 latex_engine = 'xelatex'
 
-latex_documents = [(
-    'index', 
-    'main.tex', 
-    project,
-    author.replace(', ', '\\and '),
-    'howto',
-    True
-    )
-]
-
 latex_logo = 'source/images/logounal.png'
 latex_toplevel_sectioning = 'section'
+# latex_appendices = ['source/appendices/appendix-a']
 latex_show_urls = 'footnote'
+lates_show_pagerefs = True 
 
 latex_elements = {
     'papersize': 'letterpaper',
@@ -81,7 +73,7 @@ latex_elements = {
     'maketitle': '''
         \\begin{titlepage}
             \\centering 
-            \\includegraphics[width=0.7\\textwidth]{logounal.png}   \\\\    \\vspace{\\fill}
+            \\includegraphics[width=0.4\\textwidth]{logounal.png}   \\\\    \\vspace{\\fill}
             \\LARGE \\textbf{%s}                                    \\\\    \\vspace{\\fill}
             \\normalsize \\textsl{%s}                               \\\\    \\vspace{\\fill}
             \\textbf{Profesor:}                                     \\\\
@@ -90,10 +82,14 @@ latex_elements = {
             Facultad de Ingeniería                                  \\\\
             Departamento de Ingeniería Mecánica y Mecatrónica       \\\\
             Proyecto Aplicado de Ingeniería                         \\\\
-            Bogotá, Colombia                                        
+            Bogotá, Colombia                                        \\\\
             \\the\\year
         \end{titlepage}
     ''' % (project, author.replace(', ', '\\\\')),
     'figure_align': 'H',
-    'hyperref': '\\usepackage{hyperref}'
+    'hyperref': '\\usepackage{hyperref}',
+    'tableofcontents': '\\tableofcontents\\newpage',
 }
+
+latex_docclass = {'howto': 'article'}
+latex_theme = 'howto'
