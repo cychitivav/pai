@@ -1,3 +1,4 @@
 sphinx-book-theme==1.0.1
 ipympl==0.9.3
 myst-nb==0.17.2
+sphinx-favicon
