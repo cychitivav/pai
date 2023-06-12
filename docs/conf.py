@@ -41,7 +41,7 @@ html_search_language = 'es'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
 latex_engine = 'xelatex'
 
-latex_logo = 'source/images/logounal.png'
+latex_logo = 'images/logounal.png'
 latex_toplevel_sectioning = 'section'
 # latex_appendices = ['source/appendices/appendix-a']
 latex_show_urls = 'footnote'
