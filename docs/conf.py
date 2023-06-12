@@ -13,7 +13,7 @@ version = '1.0.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
-extensions = ['myst_nb']
+extensions = ['myst_nb', 'sphinx_favicon']
 
 source_suffix = {
     '.rst': 'restructuredtext',
@@ -36,6 +36,22 @@ math_number_all = True
 html_theme = 'sphinx_book_theme'
 
 html_search_language = 'es'
+
+html_theme_options = {
+    'repository_url': 'https://github.com/cychitivav/pai',
+    'repository_branch': 'main',
+    'path_to_docs': 'docs/source',
+    'use_repository_button': True,
+    "logo": {
+        "text": "Documentación vehículo de muestreo",
+    }
+}
+
+html_logo = 'https://user-images.githubusercontent.com/30636259/235979806-03ed419c-5748-45eb-b5bb-1ab401ddd267.png'
+
+favicons = [
+    {"href": 'https://user-images.githubusercontent.com/30636259/235979806-03ed419c-5748-45eb-b5bb-1ab401ddd267.png'}
+]
 
 # -- Options for LaTeX output ------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-latex-output
@@ -88,7 +104,11 @@ latex_elements = {
     ''' % (project, author.replace(', ', '\\\\')),
     'figure_align': 'H',
     'hyperref': '\\usepackage{hyperref}',
-    'tableofcontents': '\\tableofcontents\\newpage',
+    'tableofcontents': '''
+        \\listoffigures
+        \\listoftables
+        \\tableofcontents\\newpage
+    '''
 }
 
 latex_docclass = {'howto': 'article'}
