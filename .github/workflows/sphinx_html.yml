@@ -9,9 +9,6 @@ on:
       - main
     paths:
       - 'docs/**'
-  pull_request:
-    branches:    
-      - 'docs/**'
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
