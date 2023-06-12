@@ -104,7 +104,11 @@ latex_elements = {
     ''' % (project, author.replace(', ', '\\\\')),
     'figure_align': 'H',
     'hyperref': '\\usepackage{hyperref}',
-    'tableofcontents': '\\tableofcontents\\newpage',
+    'tableofcontents': '''
+        \\listoffigures
+        \\listoftables
+        \\tableofcontents\\newpage
+    '''
 }
 
 latex_docclass = {'howto': 'article'}
