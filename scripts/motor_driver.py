@@ -24,7 +24,7 @@ class Motor():
         self.speed = 0
 
     def set_speed(self, speed: float):
-        rate = rospy.Rate(120)  # 120hz
+        rate = rospy.Rate(204)  # 120hz
 
         step = 2*self.MAX_SPEED/100 * (1 if speed > self.speed else -1)
         instant_speed = self.speed
@@ -90,9 +90,13 @@ class DualMotorDriver():
         rospy.loginfo("Driver " + rospy.get_name() + " started")
         rospy.loginfo("Driver " + rospy.get_name() + " pins: " + str(pin_out))
 
-        if rospy.is_shutdown():
-            self.pi.stop()
-
+        rospy.on_shutdown(self.stop)
+        
+    def stop(self):
+        self.disable()
+        self.set_speed_M1(Float64(0))
+        self.set_speed_M2(Float64(0))
+        self.pi.stop()
 
     def set_speed_M1(self, Float64_msg):
         m1_speed = Float64_msg.data
