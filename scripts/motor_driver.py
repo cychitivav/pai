@@ -15,27 +15,40 @@ class Motor():
         self.pwm_pin = pwm_pin
         self.dir_pin = dir_pin
 
-    def set_speed(self, speed: float):
-        if speed < 0:
-            speed = -speed
-            dir_value = 1
-        else:
-            dir_value = 0
-
-        if speed > self.MAX_SPEED:
-            speed = self.MAX_SPEED
-
-        # Set direction
-        self.pi.write(self.dir_pin, dir_value)
-        
         # Set range to 0-100
         self.pi.set_PWM_range(self.pwm_pin, 100)
 
         # Set frequency to 8kHz
         self.pi.set_PWM_frequency(self.pwm_pin, 8000)
 
-        # Set duty cycle to speed
-        self.pi.set_PWM_dutycycle(self.pwm_pin, speed)
+        self.speed = 0
+
+    def set_speed(self, speed: float):
+        rate = rospy.Rate(10)  # 10hz
+
+        if not rospy.is_shutdown():
+            for instant_speed in range(self.speed, speed, 2*self.MAX_SPEED/100):
+                if instant_speed < 0:
+                    abs_speed = -instant_speed
+                    dir_value = 1
+                else:
+                    abs_speed = instant_speed
+                    dir_value = 0
+
+                if abs_speed > self.MAX_SPEED:
+                    abs_speed = self.MAX_SPEED
+                
+                # Set direction
+                self.pi.write(self.dir_pin, dir_value)
+                # Set duty cycle to speed
+                self.pi.set_PWM_dutycycle(self.pwm_pin, abs_speed)
+
+                rospy.loginfo("Motor speed: " + str(instant_speed))
+
+                rate.sleep()
+
+            self.speed = speed
+            rospy.logwarn("Motor speed: " + str(self.speed))
 
 
 class DualMotorDriver():
