@@ -8,12 +8,15 @@ En el presente informe, se describirán los pasos clave seguidos en el proceso d
 Esperamos que este informe sirva como una guía útil para aquellos interesados en el diseño y construcción de vehículos similares, y que fomente futuras investigaciones y desarrollos en este campo de estudio. Agradecemos cualquier comentario o sugerencia que pueda contribuir a mejorar el diseño y funcionalidad del vehículo en futuras iteraciones.
 
 .. toctree::
-   introduction
+   :maxdepth: 3
+   :caption: Tabla de contenido
+   :numbered:
+
    problem
+   metodology
    design
    details
    verification
    manufacturing
    validation
    conclusions
-
