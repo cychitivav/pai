@@ -2,9 +2,13 @@
 
 ## Raspbery pin out 
 
-![rpi pin out](https://github.com/cychitivav/pai/assets/30636259/018453a2-3278-494c-a706-0de937c5933a)
+```{image} https://github.com/cychitivav/pai/assets/30636259/018453a2-3278-494c-a706-0de937c5933a
+:alt: Raspberry pin out
+:width: 60%
+:align: center
+```
 
-driver left
+### Driver left
 
 - FAULT: 37 (GPIO 26)
 - PWM2: 35 (GPIO 19) # Back left motor
@@ -13,7 +17,7 @@ driver left
 - DIR1: 29 (GPIO 5)
 - EN: 15 (GPIO 22)
 
-driver right
+### Driver right
 
 - FAULT: 10 (GPIO 15)
 - PWM2: 12 (GPIO 18) # Back right motor 
