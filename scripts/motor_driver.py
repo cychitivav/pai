@@ -27,7 +27,13 @@ class Motor():
         rate = rospy.Rate(10)  # 10hz
 
         if not rospy.is_shutdown():
-            for instant_speed in range(self.speed, speed, 2*self.MAX_SPEED/100):
+
+            step = 2*self.MAX_SPEED/100 * (1 if speed > self.speed else -1)
+
+            instant_speed = self.speed
+            while abs(instant_speed - speed) > abs(step):
+                instant_speed += step
+
                 if instant_speed < 0:
                     abs_speed = -instant_speed
                     dir_value = 1
