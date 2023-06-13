@@ -24,7 +24,7 @@ class Motor():
         self.speed = 0
 
     def set_speed(self, speed: float):
-        rate = rospy.Rate(10)  # 10hz
+        rate = rospy.Rate(120)  # 120hz
 
         if not rospy.is_shutdown():
 
