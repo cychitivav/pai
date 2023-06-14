@@ -63,14 +63,14 @@ class DualMotorDriver():
         self.pin_FAULT = pin_out['FAULT']
         # make sure FAULT is pulled up
         self.pi.set_pull_up_down(self.pin_FAULT, pigpio.PUD_UP)
+        # Check for faults
+        self.pi.callback(self.pin_FAULT, pigpio.FALLING_EDGE,
+                         self.get_fault)
 
         # Initialize enable pin
         self.pin_EN = pin_out['EN']
         # enable drivers by default
         self.pi.write(self.pin_EN, 0)
-        # Check for faults
-        self.pi.callback(self.pin_FAULT, pigpio.FALLING_EDGE,
-                         self.get_fault)
 
         # Subscriber
         self.sub_front_right = rospy.Subscriber(
