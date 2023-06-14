@@ -94,12 +94,12 @@ class DualMotorDriver():
 
     def set_speed_M1(self, Float64_msg):
         m1_speed = Float64_msg.data
-        self.motorA.set_ramp_speed(m1_speed)
+        self.motorA.set_speed(m1_speed)
         rospy.logdebug("Motor 1 speed:" + str(m1_speed))
 
     def set_speed_M2(self, Float64_msg):
         m2_speed = Float64_msg.data
-        self.motorB.set_ramp_speed(m2_speed)
+        self.motorB.set_speed(m2_speed)
         rospy.logdebug("motor 2 speed:" + str(m2_speed))
 
     def get_fault(self):
