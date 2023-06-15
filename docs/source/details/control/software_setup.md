@@ -69,12 +69,24 @@ angular:
 
 For further configuration check out the Miscellaneous section.
 
+## Slow boot time
+At start up the `systemd-networkd-wait-online.service` waits for a network to be connected. Which makes the the start up time really long if no network is connected. You change the configuration of the service in order to reduce the wait time. Find the line  that starts with `ExecStart=[PATH]`inside the  `systemd-networkd-wait-online.service` and add the  parameter `--timeout=10`
+
+```
+sudo systemctl disable NetworkManager-wait-online.service
+sudo nano  systemd-networkd-wait-online.service
+#  ExecStart=/lib/systemd/systemd-networkd-wait-online --timeout=10
+```
+
+
+
 <details>
   <summary><h2>Miscellaneous configuration </h2></summary>
   <p>ssh remote.</p>
   <p>development environment (install vscode and list of vscode extensions).</p>
   <p>add raspbian apt archive.</p>
   <p>configure vnc server.</p>
+  
 </details> 
 
 ## References
