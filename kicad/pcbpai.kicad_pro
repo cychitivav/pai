@@ -440,10 +440,44 @@
         "line_style": 0,
         "microvia_diameter": 0.3,
         "microvia_drill": 0.1,
+        "name": "11A",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgb(255, 85, 248)",
+        "track_width": 5.38,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
         "name": "3A",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(255, 38, 38)",
-        "track_width": 1.27,
+        "track_width": 0.8976,
+        "via_diameter": 0.8,
+        "via_drill": 0.4,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "4A",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "schematic_color": "rgb(255, 161, 49)",
+        "track_width": 1.33,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -460,24 +494,7 @@
         "name": "8A",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(30, 104, 255)",
-        "track_width": 5.588,
-        "via_diameter": 0.8,
-        "via_drill": 0.4,
-        "wire_width": 6
-      },
-      {
-        "bus_width": 12,
-        "clearance": 0.2,
-        "diff_pair_gap": 0.25,
-        "diff_pair_via_gap": 0.25,
-        "diff_pair_width": 0.2,
-        "line_style": 0,
-        "microvia_diameter": 0.3,
-        "microvia_drill": 0.1,
-        "name": "Normales",
-        "pcb_color": "rgba(0, 0, 0, 0.000)",
-        "schematic_color": "rgb(27, 255, 49)",
-        "track_width": 0.4,
+        "track_width": 3.47,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -488,38 +505,14 @@
     },
     "net_colors": null,
     "netclass_assignments": {
+      "+24V": "11A",
       "Net-(J1-Pin_1)": "3A",
       "Net-(J1-Pin_2)": "3A",
-      "Net-(J4-Pin_2)": "8A",
-      "Net-(J5-Pin_2)": "3A",
+      "Net-(J4-Pin_2)": "11A",
+      "Net-(J5-Pin_2)": "8A",
       "Net-(J7-Pin_2)": "3A"
     },
-    "netclass_patterns": [
-      {
-        "netclass": "8A",
-        "pattern": "+24V"
-      },
-      {
-        "netclass": "8A",
-        "pattern": "Net - (J4-Pin_2) "
-      },
-      {
-        "netclass": "Default",
-        "pattern": ""
-      },
-      {
-        "netclass": "Default",
-        "pattern": ""
-      },
-      {
-        "netclass": "Default",
-        "pattern": ""
-      },
-      {
-        "netclass": "Default",
-        "pattern": "Net 87"
-      }
-    ]
+    "netclass_patterns": []
   },
   "pcbnew": {
     "last_paths": {

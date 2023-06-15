@@ -1,15 +1,19 @@
-(footprint "pulsador" (version 20221018) (generator pcbnew)
+(footprint "switch" (version 20221018) (generator pcbnew)
   (layer "F.Cu")
   (attr smd)
-  (fp_text reference "REF**" (at 0.08 -1.2 unlocked) (layer "F.SilkS") hide
+  (fp_text reference "REF**" (at 1.778 -1.2 unlocked) (layer "F.SilkS") hide
       (effects (font (size 1 1) (thickness 0.1)))
     (tstamp 361e4df0-5127-4b2b-9b21-57541ece3dd1)
   )
-  (fp_text value "pulsador" (at -0.11 5.35 unlocked) (layer "F.Fab") hide
+  (fp_text value "Switch 2P2T" (at 1.016 8.382 unlocked) (layer "F.Fab") hide
       (effects (font (size 1 1) (thickness 0.15)))
     (tstamp 56a91925-e223-44b4-8694-3a133479494b)
   )
-  (fp_rect (start -4.14 -1.04) (end 6.68 8.98)
+  (fp_rect (start -2.54 -0.254) (end 5.08 7.366)
+    (stroke (width 0.1) (type default)) (fill none) (layer "F.SilkS") (tstamp 152506f3-30d8-43cc-bb77-4e076950f5a2))
+  (fp_rect (start 0.127 2.54) (end 2.413 4.826)
+    (stroke (width 0.1) (type default)) (fill none) (layer "F.SilkS") (tstamp b83ceeb7-096f-4d72-b672-8da3f8ffb048))
+  (fp_rect (start -2.794 -0.508) (end 5.334 7.62)
     (stroke (width 0.05) (type default)) (fill none) (layer "F.CrtYd") (tstamp ad0cb578-4d3c-4c3a-8b9a-66f34cc0502e))
   (pad "1" thru_hole rect (at -1.17 1.03) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 99f7a3f1-0f94-424b-a4e0-371098fcd767))
   (pad "2" thru_hole oval (at -1.17 3.57) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 0c9f96f9-ad83-4b8c-89a1-8acafd471692))
