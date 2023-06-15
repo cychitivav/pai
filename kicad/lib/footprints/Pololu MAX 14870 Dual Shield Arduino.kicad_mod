@@ -41,4 +41,59 @@
   (pad "24" thru_hole circle (at 10.43 -7.61) (size 2 2) (drill 1.02) (layers "*.Cu" "*.Mask") (tstamp 7d46626f-7fd9-4283-b9c9-4eca4fc1b0fc))
   (pad "25" thru_hole circle (at 5.35 -7.61) (size 2 2) (drill 1.02) (layers "*.Cu" "*.Mask") (tstamp 0ea0cfeb-950e-49e6-8e39-912aa6a6ca6d))
   (pad "26" thru_hole circle (at 2.81 -7.61) (size 2 2) (drill 1.02) (layers "*.Cu" "*.Mask") (tstamp 6bef2ab7-610b-4e20-b9cf-b54ba965cffa))
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x02_P2.54mm_Vertical.wrl"
+    (offset (xyz 5.35 7.6 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x12_P2.54mm_Vertical.wrl"
+    (offset (xyz 4.45 41.25 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x06_P2.54mm_Vertical.wrl"
+    (offset (xyz 23.14 7.6 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x06_P2.54mm_Vertical.wrl"
+    (offset (xyz 21.6 47 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x12_P2.54mm_Vertical.wrl"
+    (offset (xyz 4.45 41.3 9.5))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 180 0))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.wrl"
+    (offset (xyz 23.15 7.6 9.5))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 180 90))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_PinHeader_2.54mm.3dshapes/PinHeader_1x06_P2.54mm_Vertical.wrl"
+    (offset (xyz 21.6 47 9.5))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 180 90))
+  )
+  (model "${KIPRJMOD}/model/dual-max14870-motor-driver-shield-for-arduino.step"
+    (offset (xyz 24.4 50.82 9))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 180))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_Phoenix_MSTB.3dshapes/PhoenixContact_MSTBA_2,5_2-G_1x02_P5.00mm_Horizontal.wrl"
+    (offset (xyz 2.7 40 10.6))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_Phoenix_MSTB.3dshapes/PhoenixContact_MSTBA_2,5_2-G_1x02_P5.00mm_Horizontal.wrl"
+    (offset (xyz 2.7 30 10.6))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
+  (model ":KICAD7_3DMODEL_DIR:Connector_Phoenix_MSTB.3dshapes/PhoenixContact_MSTBA_2,5_2-G_1x02_P5.00mm_Horizontal.wrl"
+    (offset (xyz 2.7 20 10.6))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 90))
+  )
 )

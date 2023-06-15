@@ -1,4 +1,4 @@
 (sym_lib_table
   (version 7)
-  (lib (name "LibPai")(type "KiCad")(uri "${KIPRJMOD}/LibPai.kicad_sym")(options "")(descr ""))
+  (lib (name "Lib_PAI")(type "KiCad")(uri "${KIPRJMOD}/lib/lib_pai.kicad_sym")(options "")(descr ""))
 )

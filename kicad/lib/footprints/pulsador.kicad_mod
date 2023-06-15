@@ -17,4 +17,9 @@
   (pad "4" thru_hole rect (at 3.91 1.03) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp c8ecd0da-bd9d-41bb-bc46-7e08872bec6d))
   (pad "5" thru_hole oval (at 3.91 3.57) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 4114c9fc-61d1-4be3-aea6-66a1899cc4a7))
   (pad "6" thru_hole oval (at 3.91 6.11) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (tstamp 20c0e846-2c2e-4a75-978d-a736d27c401b))
+  (model "${KIPRJMOD}/model/LatchSwitch_7x7.step"
+    (offset (xyz 1.3 -3.5 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 90 0 0))
+  )
 )
