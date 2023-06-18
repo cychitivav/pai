@@ -1,0 +1,2 @@
+Subsistema estructural
+----------------------
