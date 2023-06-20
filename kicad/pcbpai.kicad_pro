@@ -508,9 +508,8 @@
       "+24V": "11A",
       "Net-(J1-Pin_1)": "3A",
       "Net-(J1-Pin_2)": "3A",
-      "Net-(J4-Pin_2)": "11A",
-      "Net-(J5-Pin_2)": "8A",
-      "Net-(J7-Pin_2)": "3A"
+      "Net-(J10-Pin_2)": "11A",
+      "Net-(J4-Pin_2)": "11A"
     },
     "netclass_patterns": []
   },
