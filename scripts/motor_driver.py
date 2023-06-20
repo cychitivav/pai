@@ -3,44 +3,13 @@ import sys
 
 import pigpio
 import rospy
-from std_msgs.msg import Bool, Float64
+from std_msgs.msg import Float64
 
 
-class Motor():
-    MAX_SPEED = 100#160 * (2*3.14/60)  # 160 rpm
+class MotorDriver():
+    MAX_SPEED = 100  # 160 * (2*3.14/60)  # 160 rpm
 
-    def __init__(self, pwm_pin: int, dir_pin: int, pi: pigpio.pi):
-        self.pi = pi
-
-        self.pwm_pin = pwm_pin
-        self.dir_pin = dir_pin
-
-    def set_speed(self, speed: float):
-        if speed < 0:
-            speed = -speed
-            dir_value = 1
-        else:
-            dir_value = 0
-
-        if speed > self.MAX_SPEED:
-            speed = self.MAX_SPEED
-
-        # Set direction
-        self.pi.write(self.dir_pin, dir_value)
-        
-        # Set range to 0-100
-        self.pi.set_PWM_range(self.pwm_pin, 100)
-
-        # Set frequency to 8kHz
-        self.pi.set_PWM_frequency(self.pwm_pin, 8000)
-
-        # Set duty cycle to speed
-        self.pi.set_PWM_dutycycle(self.pwm_pin, speed)
-
-
-class DualMotorDriver():
-
-    def __init__(self, host='localhost', pin_out: dict = {'FAULT': 23, 'PWM2': 24, 'PWM1': 12, 'DIR2': 16, 'DIR1': 20, 'EN': 21}):
+    def __init__(self, host='localhost', pin_out: dict = {'EN': 18, 'PWM_R': 23, 'PWM_L': 24}):
         rospy.init_node("Driver", anonymous=True)
 
         # Initialize pigpio
@@ -49,59 +18,70 @@ class DualMotorDriver():
             rospy.signal_shutdown("Pigpio not connected, run `sudo pigpiod` or specify host")
             exit()
 
-        # Initialize motors
-        self.motorA = Motor(pin_out['PWM1'], pin_out['DIR1'], self.pi)
-        self.motorB = Motor(pin_out['PWM2'], pin_out['DIR2'], self.pi)
+        # Set PWM pins
+        # Initialize pins
+        self.pwm_forward = pin_out['PWM_L']
+        self.pwm_reverse = pin_out['PWM_R']
 
-        # Initialize fault pin
-        self.pin_FAULT = pin_out['FAULT']
-        self.pi.set_pull_up_down(self.pin_FAULT, pigpio.PUD_UP)  # make sure FAULT is pulled up
+        # Set range to 0-100
+        self.pi.set_PWM_range(self.pwm_forward, 10000)
+        self.pi.set_PWM_range(self.pwm_reverse, 10000)
+
+        # Set frequency to 8kHz (pigpiod by default mode 5)
+        self.pi.set_PWM_frequency(self.pwm_forward, 8000)
+        self.pi.set_PWM_frequency(self.pwm_reverse, 8000)
+
+        # Turn off motors
+        self.pi.set_PWM_dutycycle(self.pwm_forward, 0)
+        self.pi.set_PWM_dutycycle(self.pwm_reverse, 0)
 
         # Initialize enable pin
         self.pin_EN = pin_out['EN']
-        self.pi.write(self.pin_EN, 0)  # enable drivers by default
+        self.pi.write(self.pin_EN, 1)  # enable drivers by default
 
         # Subscriber
-        self.sub_front_right = rospy.Subscriber(
-            '/motor_A_ctrl/command', Float64, self.set_speed_M1)
-        self.sub_front_left = rospy.Subscriber(
-            '/motor_B_ctrl/command', Float64, self.set_speed_M2)
+        self.sub_front_right = rospy.Subscriber('/motor_ctrl/command', Float64, self.set_speed)
 
-        # Publishers
-        self.pub_fault_warning = rospy.Publisher('/fault_warning', Bool, queue_size=10)
+        rospy.loginfo("Driver " + rospy.get_name() + " started")
+        rospy.loginfo("Driver " + rospy.get_name() + " pins: " + str(pin_out))
 
-        rospy.loginfo("Driver start")
-        rospy.loginfo("Driver pinout: " + str(pin_out))
+        rospy.on_shutdown(self.stop)
 
-    def set_speed_M1(self, Float64_msg):
-        m1_speed = Float64_msg.data
-        self.motorA.set_speed(m1_speed)
-        rospy.logdebug("Motor 1 speed:" + str(m1_speed))
+    def set_speed(self, Float64_msg):
+        speed = Float64_msg.data
 
-    def set_speed_M2(self, Float64_msg):
-        m2_speed = Float64_msg.data
-        self.motorB.set_speed(m2_speed)
-        rospy.logdebug("motor 2 speed:" + str(m2_speed))
+        if abs(speed) > self.MAX_SPEED:
+            speed = self.MAX_SPEED * speed / abs(speed)
 
-    def get_fault(self):
-        Bool_msg = Bool(self.getFault())
+        if speed > 0:  # Turn left (forward)
+            self.pi.set_PWM_dutycycle(self.pwm_reverse, 0)
+            rospy.sleep(0.001)
+            self.pi.set_PWM_dutycycle(self.pwm_forward, speed*100)
+        else:  # Turn right (reverse)
+            self.pi.set_PWM_dutycycle(self.pwm_forward, 0)
+            rospy.sleep(0.001)
+            self.pi.set_PWM_dutycycle(self.pwm_reverse, -speed*100)
 
-        rospy.logwarn("Driver fault detected")
-        self.pub_fault_warning(Bool_msg)
+        rospy.logdebug("Motor " + rospy.get_name() + " speed:" + str(speed))
 
     def enable(self):
-        rospy.logwarn("Motors enabled")
-        self.pi.write(self.pin_EN, 0)
+        rospy.logwarn("Motor " + rospy.get_name() + " enabled")
+        self.pi.write(self.pin_EN, 1)
 
     def disable(self):
-        rospy.logwarn("Motors disabled")
-        self.pi.write(self.pin_EN, 1)
+        rospy.logwarn("Motor " + rospy.get_name() + " disabled")
+        self.pi.write(self.pin_EN, 0)
+
+    def stop(self):
+        self.disable()
+        self.set_speed(Float64(0))
+        self.pi.stop()
 
 
 if __name__ == '__main__':
     if len(sys.argv) > 2:
         pins = rospy.get_param(sys.argv[2])
-        DualMotorDriver(host=sys.argv[1], pin_out=pins)
-    else: 
-        DualMotorDriver()
+        MotorDriver(host=sys.argv[1], pin_out=pins)
+    else:
+        MotorDriver()
     rospy.spin()
