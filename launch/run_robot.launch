@@ -41,16 +41,6 @@
         <remap from="/motor_ctrl/command" to="/back_right_wheel_ctrl/command" />
     </node>
 
-    <!-- Front left driver  -->
-    <node name="front_left_driver"
-        pkg="pai" output="screen"
-        type="motor_driver.py"
-        args="$(arg host) driver_front_left"
-        required="true"
-    >
-        <remap from="/motor_ctrl/command" to="/front_left_wheel_ctrl/command" />
-    </node>
-
     <!-- back left driver  -->
     <node name="back_left_driver"
         pkg="pai" output="screen"
