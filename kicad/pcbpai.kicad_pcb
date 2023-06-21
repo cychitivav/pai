@@ -42,7 +42,7 @@
     (pad_to_mask_clearance 0)
     (pcbplotparams
       (layerselection 0x00010f0_ffffffff)
-      (plot_on_all_layers_selection 0x003f3f0_80000000)
+      (plot_on_all_layers_selection 0x00010f0_80000001)
       (disableapertmacros false)
       (usegerberextensions false)
       (usegerberattributes true)

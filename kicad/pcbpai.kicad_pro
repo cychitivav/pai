@@ -45,7 +45,7 @@
         "silk_text_thickness": 0.15,
         "silk_text_upright": false,
         "zones": {
-          "min_clearance": 0.7
+          "min_clearance": 1.2
         }
       },
       "diff_pair_dimensions": [
@@ -443,7 +443,7 @@
         "name": "11A",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(255, 85, 248)",
-        "track_width": 5.38,
+        "track_width": 7.0,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
@@ -460,7 +460,7 @@
         "name": "3A",
         "pcb_color": "rgba(0, 0, 0, 0.000)",
         "schematic_color": "rgb(255, 38, 38)",
-        "track_width": 0.8976,
+        "track_width": 1.37,
         "via_diameter": 0.8,
         "via_drill": 0.4,
         "wire_width": 6
