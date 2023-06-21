@@ -8,6 +8,9 @@
         type="kinematic_model.py"
     />
 
+    <!-- Battery sensor -->
+    <node name="battery_sensor" pkg="pai" output="screen" type="battery.py" />
+
     <!-- Drivers -->
     <rosparam file="$(find pai)/config/drivers_pinout.yaml" command="load" />
 
