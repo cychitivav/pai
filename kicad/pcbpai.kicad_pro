@@ -433,7 +433,7 @@
       },
       {
         "bus_width": 12,
-        "clearance": 0.2,
+        "clearance": 0.3,
         "diff_pair_gap": 0.25,
         "diff_pair_via_gap": 0.25,
         "diff_pair_width": 0.2,
@@ -506,10 +506,10 @@
     "net_colors": null,
     "netclass_assignments": {
       "+24V": "11A",
-      "Net-(J1-Pin_1)": "3A",
-      "Net-(J1-Pin_2)": "3A",
       "Net-(J10-Pin_2)": "11A",
-      "Net-(J4-Pin_2)": "11A"
+      "Net-(J9-Pin_2)": "3A",
+      "Net-(SW1-B)": "11A",
+      "Net-(U4-out1)": "3A"
     },
     "netclass_patterns": []
   },
