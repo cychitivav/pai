@@ -1,16 +1,20 @@
-driver_L:
-  # GPIO pin number
-  FAULT: 26
-  PWM2: 19
-  PWM1: 13
-  DIR2: 6
-  DIR1: 5
-  EN: 22
+# GPIO pin number
+driver_front_right:
+  EN: 18 # GPIO 18, pin 12
+  PWM_R: 23 # GPIO 23, pin 16 (Reverse)
+  PWM_L: 24 # GPIO 24, pin 18 (Forward)
 
-driver_R:
-  FAULT: 15
-  PWM2: 18
-  PWM1: 12
-  DIR2: 16
-  DIR1: 20
-  EN: 21
+driver_back_right:
+  EN: 16 # GPIO 16, pin 36
+  PWM_R: 20 # GPIO 20, pin 38 (Reverse)
+  PWM_L: 21 # GPIO 21, pin 40 (Forward)
+
+driver_front_left:
+  EN: 17 # GPIO 17, pin 11
+  PWM_R: 27 # GPIO 27, pin 13 (Reverse)
+  PWM_L: 22 # GPIO 22, pin 15 (Forward)
+
+driver_back_left:
+  EN: 13 # GPIO 13, pin 33
+  PWM_R: 19 # GPIO 19, pin 35 (Reverse)
+  PWM_L: 26 # GPIO 26, pin 37 (Forward)

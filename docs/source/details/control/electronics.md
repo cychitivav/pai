@@ -10,20 +10,20 @@
 
 ### Driver left
 
-- FAULT: 37 (GPIO 26)
-- PWM2: 35 (GPIO 19) # Back left motor
-- PWM1: 33 (GPIO 13) # Front left motor 
-- DIR2: 31 (GPIO 6) 
-- DIR1: 29 (GPIO 5)
-- EN: 15 (GPIO 22)
+- FAULT: 35 (GPIO 19)
+- PWM2: 31 (GPIO 6) # Back left motor
+- PWM1: 19 (GPIO 10) # Front left motor
+- DIR2: 13 (GPIO 27)
+- DIR1: 11 (GPIO 17)
+- EN: 7 (GPIO 4)
 
 ### Driver right
 
-- FAULT: 10 (GPIO 15)
-- PWM2: 12 (GPIO 18) # Back right motor 
-- PWM1: 32 (GPIO 12) # Front right motor
-- DIR2: 36 (GPIO 16)
-- DIR1: 38 (GPIO 20)
+- FAULT: 8 (GPIO 14)
+- PWM2: 18 (GPIO 23) # Back right motor 
+- PWM1: 22 (GPIO 25) # Front right motor
+- DIR2: 24 (GPIO 8)
+- DIR1: 32 (GPIO 12)
 - EN: 40 (GPIO 21)
 
 

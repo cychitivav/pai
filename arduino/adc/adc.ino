@@ -28,7 +28,7 @@
 
   2. Upload ArduinoISP sketch to Arduino:
     File > Examples > ArduinoISP
-  
+
   3. Set up Arduino IDE for ATtiny85:
     Tools > Board > ATtiny25/45/85
     Tools > Processor > ATtiny85
@@ -54,8 +54,8 @@
 
 void setup()
 {
-  pinMode(3, INPUT);                // Set PB3 (ADC3) as input
-  TinyWire.begin(ADDR);          // config TinyWire library for I2C slave functionality
+  pinMode(3, INPUT);               // Set PB3 (ADC3) as input
+  TinyWire.begin(ADDR);            // config TinyWire library for I2C slave functionality
   TinyWire.onRequest(sendVoltage); // register a handler function in case of a request from a master
 }
 

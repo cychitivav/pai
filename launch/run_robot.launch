@@ -8,28 +8,49 @@
         type="kinematic_model.py"
     />
 
+    <!-- Battery sensor -->
+    <node name="battery_sensor" pkg="pai" output="screen" type="battery.py" />
+
     <!-- Drivers -->
     <rosparam file="$(find pai)/config/drivers_pinout.yaml" command="load" />
 
-    <!-- Right differential driver  -->
-    <node name="right_driver"
+    <!-- Front right driver  -->
+    <node name="front_right_driver"
         pkg="pai" output="screen"
         type="motor_driver.py"
-        args="$(arg host) driver_R"
+        args="$(arg host) driver_front_right"
         required="true"
     >
-        <remap from="/motor_A_ctrl/command" to="/front_right_wheel_ctrl/command" />
-        <remap from="/motor_B_ctrl/command" to="/back_right_wheel_ctrl/command" />
+        <remap from="/motor_ctrl/command" to="/front_right_wheel_ctrl/command" />
     </node>
 
-    <!-- Left differential driver  -->
-    <node name="left_driver"
+    <!-- Front left driver  -->
+    <node name="front_left_driver"
         pkg="pai" output="screen"
         type="motor_driver.py"
-        args="$(arg host) driver_L"
+        args="$(arg host) driver_front_left"
         required="true"
     >
-        <remap from="/motor_A_ctrl/command" to="/front_left_wheel_ctrl/command" />
-        <remap from="/motor_B_ctrl/command" to="/back_left_wheel_ctrl/command" />
+        <remap from="/motor_ctrl/command" to="/front_left_wheel_ctrl/command" />
+    </node>
+
+    <!-- back right driver  -->
+    <node name="back_right_driver"
+        pkg="pai" output="screen"
+        type="motor_driver.py"
+        args="$(arg host) driver_back_right"
+        required="true"
+    >
+        <remap from="/motor_ctrl/command" to="/back_right_wheel_ctrl/command" />
+    </node>
+
+    <!-- back left driver  -->
+    <node name="back_left_driver"
+        pkg="pai" output="screen"
+        type="motor_driver.py"
+        args="$(arg host) driver_back_left"
+        required="true"
+    >
+        <remap from="/motor_ctrl/command" to="/back_left_wheel_ctrl/command" />
     </node>
 </launch>
