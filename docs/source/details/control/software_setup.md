@@ -30,13 +30,6 @@ This project is configured as a ROS package. Clone the repo inside your workspac
 ```
 cd ~/catkin_ws/src
 git clone --recurse-submodules  https://github.com/cychitivav/pai
-``` 
-
-## Install driver library
-
-```
-cd ~/catkin_ws/src/pai/lib/max14870-driver
-sudo python3 setup.py install
 ```
 
 ## Build the ROS package
@@ -69,12 +62,53 @@ angular:
 
 For further configuration check out the Miscellaneous section.
 
+## Slow boot time
+At start up the `systemd-networkd-wait-online.service` waits for a network to be connected. Which makes the the start up time really long if no network is connected. You change the configuration of the service in order to reduce the wait time. Find the line  that starts with `ExecStart=[PATH]`inside the  `systemd-networkd-wait-online.service` and add the  parameter `--timeout=10`
+
+```
+sudo systemctl disable NetworkManager-wait-online.service
+sudo nano  systemd-networkd-wait-online.service
+#  ExecStart=/lib/systemd/systemd-networkd-wait-online --timeout=10
+```
+
+## Autostart pigpio deamon at boot
+If `pigpio` is installed from the source code, the deamon needs to be started manually, due to the fact that the installation process does not create a service. To start the deamon at boot, create a service configuration file in the following path `/etc/systemd/system/pigpiod.service.d/public.conf` and add the following lines.
+
+```conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/pigpiod
+```
+
+Then, create the service file `/lib/systemd/system/pigpiod.service` and add the following lines.
+
+```conf
+[Unit]
+Description=Daemon required to control GPIO pins via pigpio
+[Service]
+ExecStart=/usr/local/bin/pigpiod
+ExecStop=/bin/systemctl kill -s SIGKILL pigpiod
+Type=forking
+[Install]
+WantedBy=multi-user.target
+```
+
+And finally, enable and start the service.
+
+```bash
+sudo systemctl deamon-reload
+sudo systemctl enable pigpiod
+sudo systemctl start pigpiod
+```
+
+
 <details>
   <summary><h2>Miscellaneous configuration </h2></summary>
   <p>ssh remote.</p>
   <p>development environment (install vscode and list of vscode extensions).</p>
   <p>add raspbian apt archive.</p>
   <p>configure vnc server.</p>
+  
 </details> 
 
 ## References
