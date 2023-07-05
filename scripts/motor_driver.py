@@ -79,7 +79,7 @@ class MotorDriver():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 2:
+    if len(sys.argv) > 3:
         pins = rospy.get_param(sys.argv[2])
         MotorDriver(host=sys.argv[1], pin_out=pins)
     else:
