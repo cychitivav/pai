@@ -18,9 +18,13 @@ class Battery():
             exit()
 
         self.ATtiny85 = self.pi.i2c_open(1, 0x08)  # Open i2c bus 1, slave address 0x08 (ATtiny85)
-        if self.ATtiny85 < 0 and not rospy.is_shutdown():
-            rospy.signal_shutdown("Failed to open i2c bus")
-            exit()
+        try:
+            self.pi.i2c_read_byte(self.ATtiny85) >= 0
+        except pigpio.error:
+            if not rospy.is_shutdown():
+                rospy.logerr("ATtiny85 not connected, check i2c connection")
+                rospy.signal_shutdown("ATtiny85 not connected, check i2c connection")
+                exit()
 
         self.factor = 24.6/435  # Calibration factor
 
