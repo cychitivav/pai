@@ -1,7 +1,8 @@
 # Raspberry set up
 
 ## Install OS
-This project is using Ubuntu 2020 as the base OS. Use the official ubuntu guide and follow step by step installation process. [^os-install]
+This project is using Ubuntu 20.04 as the base OS. Use the official ubuntu guide and follow step by step installation process. [^os-install]
+
  > __Note:__ Ubuntu Desktop 2020 is not available in the rpi-imager so Ubuntu Server 2020 is the one used. And the following command is needed to download the necessary package to configure the desktop version.
  > ```
  > sudo apt update
@@ -22,19 +23,21 @@ unzip master.zip
 cd pigpio-master
 make
 sudo make install
+sudo rm -rf master.zip pigpio-master
 ```
 
 ## Get project 
 This project is configured as a ROS package. Clone the repo inside your workspace
 
-```
+```bash
+mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws/src
-git clone --recurse-submodules  https://github.com/cychitivav/pai
+git clone https://github.com/cychitivav/pai
 ```
 
 ## Build the ROS package
 
-```
+```bash
 cd ~/catkin_ws
 catkin build
 ```
@@ -77,7 +80,7 @@ If `pigpio` is installed from the source code, the deamon needs to be started ma
 ```conf
 [Service]
 ExecStart=
-ExecStart=/usr/bin/pigpiod
+ExecStart=/usr/local/bin/pigpiod
 ```
 
 Then, create the service file `/lib/systemd/system/pigpiod.service` and add the following lines.
