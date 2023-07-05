@@ -1,6 +1,4 @@
 #!/usr/bin/python
-import sys
-
 import pigpio
 import rospy
 from std_msgs.msg import Float64
@@ -79,9 +77,9 @@ class MotorDriver():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 3:
-        pins = rospy.get_param(sys.argv[2])
-        MotorDriver(host=sys.argv[1], pin_out=pins)
+    if len(rospy.myargv()) > 1:
+        pins = rospy.get_param(rospy.myargv()[2])
+        MotorDriver(host=rospy.myargv()[1], pin_out=pins)
     else:
         MotorDriver()
     rospy.spin()
