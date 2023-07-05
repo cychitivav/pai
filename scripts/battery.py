@@ -18,6 +18,10 @@ class Battery():
             exit()
 
         self.ATtiny85 = self.pi.i2c_open(1, 0x08)  # Open i2c bus 1, slave address 0x08 (ATtiny85)
+        if self.ATtiny85 < 0 and not rospy.is_shutdown():
+            rospy.signal_shutdown("Failed to open i2c bus")
+            exit()
+
         self.factor = 24.6/435  # Calibration factor
 
         self.pub = rospy.Publisher('/battery', BatteryState, queue_size=10)
