@@ -40,6 +40,7 @@ git clone https://github.com/cychitivav/pai
 ```bash
 cd ~/catkin_ws
 catkin build
+source devel/setup.bash
 ```
 ## Run robot
 
@@ -97,12 +98,42 @@ WantedBy=multi-user.target
 ```
 
 And finally, enable and start the service.
-
 ```bash
 sudo systemctl deamon-reload
 sudo systemctl enable pigpiod
 sudo systemctl start pigpiod
 ```
+
+## I²C setup
+In some cases the I²C bus is not enabled by default. To check if the I²C bus is enabled, run the following command.
+
+```bash
+ls /dev/i2c*
+```
+
+If the command does not return any result, the I²C bus is not enabled. To enable the I²C bus, run the following commands
+
+1. Open the file `/etc/modules` and add the following lines at the end of the file.
+
+  ```conf
+  i2c-dev
+  i2c-bcm2708
+  ```
+1. Open the file `/boot/config.txt` and add the following lines at the end of the file.
+
+  ```conf
+  dtparam=i2c_arm=on
+  dtparam=i2c1=on
+  ```
+1. Reboot the system.
+
+Finally, check if the I²C bus is enabled by running the following command.
+
+```bash
+sudo i2cdetect -y 1
+```
+
+> __Note__: Install the `i2c-tools` package from `apt` to use the `i2cdetect` command.
 
 
 <details>
