@@ -16,3 +16,5 @@ A medida que avanzamos en el proceso de diseño, se analizaron y definieron cuat
     details/mechanical/transmission
     details/electrical/power
     details/control/control
+    details/control/electronics
+    details/control/software_setup

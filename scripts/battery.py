@@ -1,6 +1,4 @@
 #!/usr/bin/python
-import sys
-
 import pigpio
 import rospy
 from sensor_msgs.msg import BatteryState
@@ -18,6 +16,14 @@ class Battery():
             exit()
 
         self.ATtiny85 = self.pi.i2c_open(1, 0x08)  # Open i2c bus 1, slave address 0x08 (ATtiny85)
+        try:
+            self.pi.i2c_read_byte(self.ATtiny85)
+        except pigpio.error:
+            if not rospy.is_shutdown():
+                rospy.logerr("ATtiny85 not connected, check i2c connection")
+                rospy.signal_shutdown("Turn off battery node due to ATtiny85 is not connected")
+                exit()
+
         self.factor = 24.6/435  # Calibration factor
 
         self.pub = rospy.Publisher('/battery', BatteryState, queue_size=10)
@@ -82,8 +88,8 @@ class Battery():
 
 
 if __name__ == '__main__':
-    if len(sys.argv) > 1:
-        Battery(sys.argv[1])
+    if len(rospy.myargv()) > 1:
+        Battery(rospy.myargv()[1])
     else:
         Battery()
 
