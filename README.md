@@ -64,7 +64,8 @@ Welcome to the <package_name> ROS 1 package repository! This package contains so
 https://github.com/Ileriayo/markdown-badges -->
 ### Built With
 * [![ROS](https://img.shields.io/badge/ros-%230A0FF9.svg?style=for-the-badge&logo=ros&logoColor=white)](ros.org)
-
+* ![Raspberry Pi](https://img.shields.io/badge/-RaspberryPi-C51A4A?style=for-the-badge&logo=Raspberry-Pi)
+* ![KiCAD](https://img.shields.io/badge/-KiCAD-4F9DB3?style=for-the-badge&logo=KiCad)
 
 
 <!-- GETTING STARTED -->
