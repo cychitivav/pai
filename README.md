@@ -16,7 +16,7 @@ Find and replace the following text with the name of the project:
 
 <!-- omit in toc -->
 # PAI's project
-Code and documentation for a UGV that can work and be teleoperated in a cultivate.
+Code and documentation for a UGV that can work and be teleoperated in a field.
 
 [**Explore the docs »**](https://cychitivav.github.io/pai)
 
@@ -164,13 +164,15 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 * [@cychitivav](https://github.com/cychitivav)
 * [@jsduenass](https://github.com/jsduenass)
 * [@juvallejom](https://github.com/juvallejom)
-
+* [@Canborda](https://github.com/canborda)
+* [@Camilo96A](https://github.com/camilo96a)
+* [@jodiazro](https://github.com/jodiazro)
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## :tada:Acknowledgments
 
-* []()
+* Thanks to the [SIMA student group]() who help out supporting this project.
 
 
 <div align="right">
