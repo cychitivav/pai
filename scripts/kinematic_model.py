@@ -47,9 +47,9 @@ class computer:
 
         # Velocity limits
         max_vel = [1, np.pi] # [m/s, rad/s]
-        xiR[0] = cmd_vel.linear.x if abs(cmd_vel.linear.x) <= max_vel[0] else sign(cmd_vel.linear.x) * max_vel[0]
-        xiR[1] = cmd_vel.linear.y if abs(cmd_vel.linear.y) <= max_vel[0] else sign(cmd_vel.linear.y) * max_vel[0]
-        xiR[2] = cmd_vel.angular.z if abs(cmd_vel.angular.z) <= max_vel[1] else sign(cmd_vel.angular.z) * max_vel[1]
+        xiR[0] = cmd_vel.linear.x #if abs(cmd_vel.linear.x) <= max_vel[0] else sign(cmd_vel.linear.x) * max_vel[0]
+        xiR[1] = cmd_vel.linear.y #if abs(cmd_vel.linear.y) <= max_vel[0] else sign(cmd_vel.linear.y) * max_vel[0]
+        xiR[2] = cmd_vel.angular.z #if abs(cmd_vel.angular.z) <= max_vel[1] else sign(cmd_vel.angular.z) * max_vel[1]
 
 
         phi = np.matmul(self.jacobian_inv, xiR)
