@@ -4,5 +4,7 @@
 	"name": "PAI",	
 	"build": {
 		"dockerfile": "../Dockerfile"
-	}
+	},
+
+	"workspaceFolder": "~/catkin_ws/src/pai"
 }
