@@ -23,8 +23,8 @@
 
     <link name="base_link">
         <inertial>
-            <mass value="1.0" />
-            <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+            <mass value="30.0" />
+            <inertia ixx="0.679438" ixy="0.0" ixz="0.0" iyy="0.486483" iyz="0.0" izz="1.001" />
         </inertial>
         <visual>
             <origin xyz="-0.3 0.0 ${BH/2 + F}" rpy="0.0 0.0 ${-pi/2}" />
