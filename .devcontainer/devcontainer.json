@@ -5,7 +5,8 @@
 	},
 	"workspaceMount": "source=${localWorkspaceFolder},target=/root/catkin_ws/src/pai,type=bind,consistency=cached", 
 	"workspaceFolder": "/root/catkin_ws/src/pai",
-	"postCreateCommand": "cd ~/catkin_ws && catkin build && echo 'source ~/catkin_ws/devel/setup.bash' >> ~/.bashrc",
+	"postCreateCommand": "apt update && apt install xauth -y",
+	"postStartCommand": "cd ~/catkin_ws && catkin build && echo 'source ~/catkin_ws/devel/setup.bash' >> ~/.bashrc",
 	"features": {
 		"ghcr.io/devcontainers/features/sshd:1": {
 			"version": "latest"

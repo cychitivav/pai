@@ -28,7 +28,7 @@
     <!-- Load controller -->
     <node name="robot_controllers" pkg="controller_manager" type="spawner" respawn="false"
         output="screen"
-        args="joint_state_controller front_left_ctrl front_right_ctrl back_left_ctrl back_right_ctrl" />
+        args="joint_state_controller front_left_wheel_ctrl front_right_wheel_ctrl back_left_wheel_ctrl back_right_wheel_ctrl" />
 
     <!-- Node python scripts -->
     <node name="kinematic_model" pkg="pai" output="screen" type="kinematic_model.py" />
