@@ -20,7 +20,7 @@
 
     <!-- Spawn model -->
     <node pkg="gazebo_ros" type="spawn_model" name="spawn_robot" respawn="false"
-        args=" -urdf -param robot_description -model $(arg robot_name) -z 0.5" />
+        args=" -urdf -param robot_description -model $(arg robot_name)" />
 
     <!-- Load joint controller configuration -->
     <rosparam file="$(find pai)/config/controller.yaml" command="load" />
