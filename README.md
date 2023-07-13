@@ -16,7 +16,7 @@ Find and replace the following text with the name of the project:
 
 <!-- omit in toc -->
 # PAI's project
-Code and documentation for a UGV that can work and be teleoperated in a cultivate.
+Code and documentation for a UGV that can work and be teleoperated in a field.
 
 [**Explore the docs »**](https://cychitivav.github.io/pai)
 
@@ -40,9 +40,8 @@ Code and documentation for a UGV that can work and be teleoperated in a cultivat
 - [:checkered\_flag:Getting Started](#checkered_flaggetting-started)
 	- [Prerequisites](#prerequisites)
 	- [Installation](#installation)
+	- [GitHub Codespace](#github-codespace)
 - [:balloon:Usage](#balloonusage)
-- [:roller\_coaster:Roadmap](#roller_coasterroadmap)
-- [:busts\_in\_silhouette:Contributing](#busts_in_silhouettecontributing)
 - [:key:License](#keylicense)
 - [:pencil2:Authors](#pencil2authors)
 - [:tada:Acknowledgments](#tadaacknowledgments)
@@ -53,10 +52,12 @@ Code and documentation for a UGV that can work and be teleoperated in a cultivat
 ## :pushpin:About The Project
 
 <div align="center">
-	<img src="https://user-images.githubusercontent.com/30636259/235977670-f7890966-2141-477a-a577-54380ec47c93.png" alt="Logo" width="80%" style="min-width: 400px;" />
+	<a href="https://cad.onshape.com/documents/2c5667e2c198d5de4bff6632/w/6e55e179f397483a4657fa47/e/d5c2a6fd63cf397246fd908f?renderMode=0&uiState=64b078163855a86c0d9b8a6c">
+		<img src="https://user-images.githubusercontent.com/30636259/235977670-f7890966-2141-477a-a577-54380ec47c93.png" alt="Logo" width="80%" style="min-width: 400px;" />
+	</a>
 </div>
 
-Welcome to the <package_name> ROS 1 package repository! This package contains source code and documentation for a UGV that can work in a field. This project is part of the *PAI* subject at the Universidad Nacional de Colombia.
+Welcome to the PAI ROS 1 package repository! This package contains source code and documentation for a UGV that can work in a field. This project is part of the *PAI* subject at the Universidad Nacional de Colombia.
 
 > __Note__: This package is being developed using ROS noetic 
 
@@ -64,7 +65,8 @@ Welcome to the <package_name> ROS 1 package repository! This package contains so
 https://github.com/Ileriayo/markdown-badges -->
 ### Built With
 * [![ROS](https://img.shields.io/badge/ros-%230A0FF9.svg?style=for-the-badge&logo=ros&logoColor=white)](ros.org)
-
+* ![Raspberry Pi](https://img.shields.io/badge/-RaspberryPi-C51A4A?style=for-the-badge&logo=Raspberry-Pi)
+* ![KiCAD](https://img.shields.io/badge/-KiCAD-4F9DB3?style=for-the-badge&logo=KiCad)
 
 
 <!-- GETTING STARTED -->
@@ -80,7 +82,7 @@ In order to avoid installing ROS on your local machine, we will be using a docke
 
 1. Clone the repo
 	```bash
-	git clone --recurse-submodules https://github.com/cychitivav/pai.git
+	git clone https://github.com/cychitivav/pai.git
 	```
 2. Build the docker image
 	```bash
@@ -100,10 +102,33 @@ In order to avoid installing ROS on your local machine, we will be using a docke
 	> xhost +local:root
 	> ```
 
+### GitHub Codespace
+Codespaces add an easy way to start contributing to this project. Some extra step are needed to run the visualization in a remote machine. You need to create a GitHub Codespace:
+
+1. To create a Codespace, click on the following button:
+   
+	[![Open in Visual Studio Code](https://img.shields.io/badge/-Open%20in%20Visual%20Studio%20Code-007ACC?style=for-the-badge&logo=visual-studio-code)](https://github.com/codespaces/new?hide_repo_select=true&ref=main&repo=600569804)
+2. Choose the configuration that best suits you (A high performance configuration is recommended)
+3. Wait for the Codespace to be created and set up (It will appear a terminal which is running some scripts)
+4. Set a password for the root user
+	```bash	
+	passwd
+	```
+
+From your local machine, you will need to run the following command:
+
+```bash	
+gh cs ssh -- -XY
+```
+
+> __Note__: You need to have the [GitHub CLI](https://cli.github.com/manual/installation) installed in your local machine.
+
+Then, select the Codespace that you want to connect to and enter the password that you set before.
+
 
 <!-- USAGE EXAMPLES -->
 ## :balloon:Usage
-In order to run the package, you will need to follow the next steps from the workspace directory (`catkin_ws`):
+In order to run the package, you will need to follow the next steps from the workspace directory (by default, `~\catkin_ws`):
 
 1. Compile packages
 ```bash
@@ -119,21 +144,20 @@ roslaunch pai view_robot.launch
 ```
 
 
-
 <!-- ROADMAP -->
-## :roller_coaster:Roadmap
+<!-- ## :roller_coaster:Roadmap
 
 - [ ] Feature 1
 - [ ] Feature 2
     - [ ] Nested Feature
 
-> __Note__: See the [open issues](https://github.com/cychitivav/pai/issues) for a full list of proposed features (and known issues).
+> __Note__: See the [open issues](https://github.com/cychitivav/pai/issues) for a full list of proposed features (and known issues). -->
 
 
 
 
 <!-- CONTRIBUTING -->
-## :busts_in_silhouette:Contributing
+<!-- ## :busts_in_silhouette:Contributing
 
 If you have a suggestion that would make this better, please create a pull request.
 
@@ -149,7 +173,7 @@ The available contribution types are:
 * `fix`
 
 Don't forget to give the project a star! Thanks again!
-
+ -->
 
 
 <!-- LICENSE -->
@@ -163,13 +187,15 @@ Distributed under the MIT License. See [`LICENSE`](LICENSE) for more information
 * [@cychitivav](https://github.com/cychitivav)
 * [@jsduenass](https://github.com/jsduenass)
 * [@juvallejom](https://github.com/juvallejom)
-
+* [@Canborda](https://github.com/canborda)
+* [@Camilo96A](https://github.com/camilo96a)
+* [@jodiazro](https://github.com/jodiazro)
 
 
 <!-- ACKNOWLEDGMENTS -->
 ## :tada:Acknowledgments
 
-* []()
+* Thanks to the [SIMA student group]() who help out supporting this project.
 
 
 <div align="right">
